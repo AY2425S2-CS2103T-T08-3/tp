@@ -7,10 +7,11 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "darren-lim": "Darren Lim",
+        "yi-fei-yang": "Yi Fei Yang",
         "alicia-chang": "Alicia Chang",
         "justin-soon": "Justin Soon",
-        "victor-poh-hong-rong": "Victor Poh Hong Rong"
+        "victor-poh-hong-rong": "Victor Poh Hong Rong",
+        "darren-lim": "Darren Lim"
       },
       "headingKeywords": {}
     },
@@ -131,6 +132,14 @@
       "title": "",
       "headings": {
         "cafeconnect": "CaféConnect"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/findingfaey.md",
+      "title": "Yi Fei's Project Portfolio Page",
+      "headings": {
+        "project-addressbook-level-3": "Project: AddressBook Level 3"
       },
       "headingKeywords": {}
     },
