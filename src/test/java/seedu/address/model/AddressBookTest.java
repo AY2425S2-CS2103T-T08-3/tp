@@ -4,13 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STUDENT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalCustomers.JAMES;
-import static seedu.address.testutil.TypicalCustomers.OLIVIA;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalStaff.BEN;
@@ -24,11 +20,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Customer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StaffBuilder;
 
@@ -64,13 +58,7 @@ public class AddressBookTest {
         Staff editedBen = new StaffBuilder(BEN).withTags(VALID_TAG_FRIEND).build();
         List<Staff> newStaffs = Arrays.asList(BEN, editedBen);
 
-        // Two customers witht he same identity fields
-        Customer editedOlivia = new CustomerBuilder(OLIVIA).withAddress(VALID_ADDRESS_OLIVIA)
-                .withTags(VALID_TAG_STUDENT)
-                .build();
-        List<Customer> newCustomers = Arrays.asList(OLIVIA, editedOlivia);
-
-        AddressBookStub newData = new AddressBookStub(newPersons, newStaffs, newCustomers);
+        AddressBookStub newData = new AddressBookStub(newPersons, newStaffs);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -156,28 +144,6 @@ public class AddressBookTest {
         assertFalse(addressBook.hasStaff(BEN));
     }
 
-    @Test
-    public void hasCustomer_nullCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasCustomer(null));
-    }
-
-    @Test
-    public void hasCustomer_customerNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasCustomer(JAMES));
-    }
-
-    @Test
-    public void hasCustomer_customerInAddressBook_returnsTrue() {
-        addressBook.addCustomer(JAMES);
-        assertTrue(addressBook.hasCustomer(JAMES));
-    }
-
-    @Test
-    public void getCustomerList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () ->
-                addressBook.getCustomerList().remove(0));
-    }
-
 
     @Test
     public void toStringMethod() {
@@ -191,12 +157,10 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Staff> staffs = FXCollections.observableArrayList();
-        private final ObservableList<Customer> customers = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Staff> staff, Collection<Customer> customer) {
+        AddressBookStub(Collection<Person> persons, Collection<Staff> staff) {
             this.persons.setAll(persons);
             this.staffs.setAll(staff);
-            this.customers.setAll(customers);
         }
 
         @Override
@@ -208,12 +172,6 @@ public class AddressBookTest {
         public ObservableList<Staff> getStaffList() {
             return staffs;
         }
-
-        @Override
-        public ObservableList<Customer> getCustomerList() {
-            return customers;
-        }
-
     }
 
 }

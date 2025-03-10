@@ -4,19 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVORITE_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS_WORKED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERFORMANCE_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REWARD_POINTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT_TIMING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STAFF_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TOTAL_SPENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT_COUNT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -113,53 +108,6 @@ public class CommandTestUtil {
     public static final String RATING_DESC_ALEX = " " + PREFIX_PERFORMANCE_RATING + VALID_RATING_ALEX;
     public static final String RATING_DESC_BEN = " " + PREFIX_PERFORMANCE_RATING + VALID_RATING_BEN;
 
-    // Constants for James Wilson
-    public static final String VALID_NAME_JAMES = "James Wilson";
-    public static final String VALID_PHONE_JAMES = "91234789";
-    public static final String VALID_EMAIL_JAMES = "james@example.com";
-    public static final String VALID_ADDRESS_JAMES = "45 Orchard Road, #12-34";
-    public static final String VALID_REMARK_JAMES = "Prefers decaf";
-    public static final String VALID_TAG_STUDENT = "student";
-    public static final int VALID_REWARD_POINTS_JAMES = 200;
-    public static final int VALID_VISIT_COUNT_JAMES = 12;
-    public static final String VALID_FAVORITE_ITEM_JAMES = "Flat White";
-    public static final double VALID_TOTAL_SPENT_JAMES = 155.75;
-    public static final int VALID_RATING_JAMES = 5;
-
-    // Constants for Olivia Chen
-    public static final String VALID_NAME_OLIVIA = "Olivia Chen";
-    public static final String VALID_PHONE_OLIVIA = "82345678";
-    public static final String VALID_EMAIL_OLIVIA = "olivia@example.com";
-    public static final String VALID_ADDRESS_OLIVIA = "88 Sunset Drive, #05-10";
-    public static final String VALID_REMARK_OLIVIA = "Birthday in March";
-    public static final String VALID_TAG_NEW = "new";
-    public static final int VALID_REWARD_POINTS_OLIVIA = 75;
-    public static final int VALID_VISIT_COUNT_OLIVIA = 3;
-    public static final String VALID_FAVORITE_ITEM_OLIVIA = "Green Tea Latte";
-    public static final double VALID_TOTAL_SPENT_OLIVIA = 42.90;
-    public static final int VALID_RATING_OLIVIA = 4;
-
-    // Command string descriptors
-    public static final String NAME_DESC_JAMES = " " + PREFIX_NAME + VALID_NAME_JAMES;
-    public static final String NAME_DESC_OLIVIA = " " + PREFIX_NAME + VALID_NAME_OLIVIA;
-    public static final String PHONE_DESC_JAMES = " " + PREFIX_PHONE + VALID_PHONE_JAMES;
-    public static final String PHONE_DESC_OLIVIA = " " + PREFIX_PHONE + VALID_PHONE_OLIVIA;
-    public static final String EMAIL_DESC_JAMES = " " + PREFIX_EMAIL + VALID_EMAIL_JAMES;
-    public static final String EMAIL_DESC_OLIVIA = " " + PREFIX_EMAIL + VALID_EMAIL_OLIVIA;
-    public static final String ADDRESS_DESC_JAMES = " " + PREFIX_ADDRESS + VALID_ADDRESS_JAMES;
-    public static final String ADDRESS_DESC_OLIVIA = " " + PREFIX_ADDRESS + VALID_ADDRESS_OLIVIA;
-    public static final String TAG_DESC_STUDENT = " " + PREFIX_TAG + VALID_TAG_STUDENT;
-    public static final String TAG_DESC_NEW = " " + PREFIX_TAG + VALID_TAG_NEW;
-    public static final String REWARD_POINTS_DESC_JAMES = " " + PREFIX_REWARD_POINTS + VALID_REWARD_POINTS_JAMES;
-    public static final String REWARD_POINTS_DESC_OLIVIA = " " + PREFIX_REWARD_POINTS + VALID_REWARD_POINTS_OLIVIA;
-    public static final String VISIT_COUNT_DESC_JAMES = " " + PREFIX_VISIT_COUNT + VALID_VISIT_COUNT_JAMES;
-    public static final String VISIT_COUNT_DESC_OLIVIA = " " + PREFIX_VISIT_COUNT + VALID_VISIT_COUNT_OLIVIA;
-    public static final String FAVORITE_ITEM_DESC_JAMES = " " + PREFIX_FAVORITE_ITEM + VALID_FAVORITE_ITEM_JAMES;
-    public static final String FAVORITE_ITEM_DESC_OLIVIA = " " + PREFIX_FAVORITE_ITEM + VALID_FAVORITE_ITEM_OLIVIA;
-    public static final String TOTAL_SPENT_DESC_JAMES = " " + PREFIX_TOTAL_SPENT + VALID_TOTAL_SPENT_JAMES;
-    public static final String TOTAL_SPENT_DESC_OLIVIA = " " + PREFIX_TOTAL_SPENT + VALID_TOTAL_SPENT_OLIVIA;
-    public static final String RATING_DESC_JAMES = " " + PREFIX_RATING + VALID_RATING_JAMES;
-    public static final String RATING_DESC_OLIVIA = " " + PREFIX_RATING + VALID_RATING_OLIVIA;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

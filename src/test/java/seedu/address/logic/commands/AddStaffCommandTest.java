@@ -22,7 +22,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Customer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.testutil.StaffBuilder;
@@ -177,36 +176,6 @@ public class AddStaffCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public ObservableList<Customer> getFilteredCustomerList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredCustomerList(Predicate<Customer> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasCustomer(Customer customer) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addCustomer(Customer customer) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        // @Override
-        // public void deleteCustomer(Customer target) {
-        //     throw new AssertionError("This method should not be called.");
-        // }
-
-        // @Override
-        // public void setCustomer(Customer target, Customer editedCustomer) {
-        //     throw new AssertionError("This method should not be called.");
-        // }
     }
 
     private class ModelStubWithStaff extends ModelStub {
