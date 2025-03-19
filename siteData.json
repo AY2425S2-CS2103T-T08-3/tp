@@ -107,7 +107,12 @@
       "src": "UserGuide.md",
       "title": "User Guide",
       "headings": {
-        "ab-3-user-guide": "AB-3 User Guide",
+        "cafeconnect-user-guide": "CaféConnect User Guide",
+        "welcome-to-cafeconnect": "Welcome to CaféConnect!",
+        "efficient-cafe-management": "Efficient Café Management",
+        "what-cafeconnect-can-do-for-you": "What CaféConnect Can Do for You",
+        "why-choose-cafeconnect": "Why Choose CaféConnect?",
+        "overview-of-target-users": "Overview of Target Users",
         "quick-start": "Quick start",
         "features": "Features",
         "viewing-help-help": "Viewing help : help",
