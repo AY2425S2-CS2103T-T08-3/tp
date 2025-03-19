@@ -119,6 +119,7 @@
         "adding-a-customer-customeradd": "Adding a customer: customeradd",
         "deleting-a-customer-customerdelete": "Deleting a customer: customerdelete",
         "recording-a-purchase-purchase": "Recording a purchase: purchase",
+        "adding-a-staff-staffadd": "Adding a staff: staffadd",
         "clearing-all-entries-clear": "Clearing all entries : clear",
         "exiting-the-program-exit": "Exiting the program : exit",
         "saving-the-data": "Saving the data",
