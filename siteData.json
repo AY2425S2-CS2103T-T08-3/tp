@@ -140,7 +140,9 @@
       "src": "index.md",
       "title": "",
       "headings": {
-        "cafeconnect": "CaféConnect"
+        "cafeconnect": "CaféConnect",
+        "key-features": "Key Features",
+        "acknowledgements": "Acknowledgements"
       },
       "headingKeywords": {}
     },
