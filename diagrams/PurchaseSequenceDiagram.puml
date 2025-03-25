@@ -14,39 +14,27 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("purchase ind/1 n/Espresso")
+[-> LogicManager : execute("purchase 1 n/Espresso redeem/true")
 activate LogicManager
 
-LogicManager -> CafeConnectParser : parseCommand("purchase ind/1 n/Espresso")
+LogicManager -> CafeConnectParser : parseCommand("purchase 1 n/Espresso redeem/true")
 activate CafeConnectParser
 
-create PurchaseCommandParser
-CafeConnectParser -> PurchaseCommandParser
-activate PurchaseCommandParser
-
-PurchaseCommandParser --> CafeConnectParser
-deactivate PurchaseCommandParser
-
-CafeConnectParser -> PurchaseCommandParser : parse("ind/1 n/Espresso")
+CafeConnectParser -> PurchaseCommandParser : parse("1 n/Espresso redeem/true")
 activate PurchaseCommandParser
 
 create PurchaseCommand
-PurchaseCommandParser -> PurchaseCommand
+PurchaseCommandParser -> PurchaseCommand : new PurchaseCommand(index, drinkName, true)
 activate PurchaseCommand
-
-PurchaseCommand --> PurchaseCommandParser :
 deactivate PurchaseCommand
 
-PurchaseCommandParser --> CafeConnectParser : p
+PurchaseCommandParser --> CafeConnectParser : purchaseCommand
 deactivate PurchaseCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-PurchaseCommandParser -[hidden]-> CafeConnectParser
-destroy PurchaseCommandParser
 
-CafeConnectParser --> LogicManager : p
+CafeConnectParser --> LogicManager : purchaseCommand
 deactivate CafeConnectParser
 
-LogicManager -> PurchaseCommand : execute(m)
+LogicManager -> PurchaseCommand : execute(model)
 activate PurchaseCommand
 
 PurchaseCommand -> Model : getFilteredCustomerList()
@@ -59,24 +47,19 @@ activate Model
 Model --> PurchaseCommand : drinkList
 deactivate Model
 
-PurchaseCommand -> Model : updateCustomer(customer, drink)
-activate Model
-Model --> PurchaseCommand
-deactivate Model
+note right of PurchaseCommand: Handle redemption case
 
-PurchaseCommand -> Model : commitAddressBook()
+PurchaseCommand -> Model : setCustomer(customerToUpdate, updatedCustomer)
 activate Model
 Model --> PurchaseCommand
 deactivate Model
 
 create CommandResult
-PurchaseCommand -> CommandResult
+PurchaseCommand -> CommandResult : new CommandResult(message)
 activate CommandResult
-
-CommandResult --> PurchaseCommand
 deactivate CommandResult
 
-PurchaseCommand --> LogicManager : r
+PurchaseCommand --> LogicManager : commandResult
 deactivate PurchaseCommand
 
 [<--LogicManager
