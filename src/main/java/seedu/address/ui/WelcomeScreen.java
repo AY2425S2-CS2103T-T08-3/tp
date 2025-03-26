@@ -2,12 +2,17 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 
@@ -17,7 +22,10 @@ import seedu.address.logic.Logic;
 public class WelcomeScreen extends UiPart<Region> {
 
     private static final String FXML = "WelcomeScreen.fxml";
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private static final Logger logger = LogsCenter.getLogger(WelcomeScreen.class);
+
+    // The path to the coffee icon
+    private static final String COFFEE_ICON_PATH = "docs/images/cafeconnect_graphics/cafeconnect-icon.png";
 
     private final Logic logic;
     private final Stage primaryStage;
@@ -31,6 +39,18 @@ public class WelcomeScreen extends UiPart<Region> {
 
     @FXML
     private StackPane welcomePane;
+
+    @FXML
+    private ImageView logoIconView;
+
+    @FXML
+    private Label titleLabel;
+
+    @FXML
+    private Label sloganLabel;
+
+    @FXML
+    private Label subtitleLabel;
 
     /**
      * Creates a welcome screen with the given parameters.
@@ -59,18 +79,69 @@ public class WelcomeScreen extends UiPart<Region> {
     }
 
     /**
-     * Shows the welcome screen.
+     * Shows the welcome screen with a fade-in animation.
      */
     public void show() {
         logger.info("Showing welcome screen");
         primaryStage.show();
+
+        // Add a fade-in transition for a more polished appearance
+        try {
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(800), welcomePane);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+        } catch (Exception e) {
+            logger.warning("Could not play fade-in animation: " + e.getMessage());
+            // Continue without animation - not critical
+        }
     }
 
     @FXML
     private void initialize() {
-        staffCustomerButton.setOnAction(event -> handleStaffCustomerButtonAction());
-        drinksMenuButton.setOnAction(event -> handleDrinksMenuButtonAction());
+        // Set a fallback style for welcomePane with a nice earthy color
+        if (welcomePane != null) {
+            welcomePane.getStyleClass().add("welcome-background");
+            welcomePane.setStyle("-fx-background-color: #F2E8CF;"); // Warm earthy color as fallback
+        }
+
+        // Style the title and slogan
+        if (titleLabel != null) {
+            titleLabel.getStyleClass().add("welcome-title");
+        }
+
+        if (sloganLabel != null) {
+            sloganLabel.getStyleClass().add("welcome-slogan");
+        }
+
+        // Safely initialize coffee icon
+        if (logoIconView != null) {
+            try {
+                // Load the coffee icon image directly from the file path
+                Image iconImage = new Image("file:" + COFFEE_ICON_PATH);
+
+                if (!iconImage.isError()) {
+                    logoIconView.setImage(iconImage);
+                    logger.info("Successfully loaded coffee icon from: " + COFFEE_ICON_PATH);
+                } else {
+                    logger.warning("Failed to load coffee icon - will try alternative paths");
+                }
+            } catch (Exception e) {
+                logger.warning("Could not load coffee icon: " + e.getMessage());
+            }
+        }
+
+        // Set up button handlers with null checks
+        if (staffCustomerButton != null) {
+            staffCustomerButton.setOnAction(event -> handleStaffCustomerButtonAction());
+        }
+
+        if (drinksMenuButton != null) {
+            drinksMenuButton.setOnAction(event -> handleDrinksMenuButtonAction());
+        }
     }
+
+
 
     /**
      * Handles the staff/customer button action.

@@ -1,310 +1,405 @@
-/* CafeConnect - Cafe Theme CSS */
+/* CafeConnect - Refined CSS with Requested Color Adjustments */
 
 /* Gotham Font Declarations */
 @font-face {
     font-family: 'Gotham Book';
     src: url('../fonts/Gotham-Book.otf') format('opentype');
 }
-
 @font-face {
     font-family: 'Gotham Bold';
     src: url('../fonts/GOTHAM-BOLD.TTF') format('truetype');
 }
-
 @font-face {
     font-family: 'Gotham Light';
     src: url('../fonts/GOTHAM-LIGHT.TTF') format('truetype');
 }
-
 @font-face {
     font-family: 'Gotham Medium';
     src: url('../fonts/GOTHAM-MEDIUM.TTF') format('truetype');
 }
 
-/* Main Color Palette
- * Dark Brown: #4A3829 (text and headers)
- * Medium Brown: #7D5A50 (accent color)
- * Light Taupe: #B9A89B (secondary elements)
- * Sand: #D9CAB3 (borders and highlights)
- * Cream: #F6F2E9 (background color)
- * Sage Green: #8A9A5B (accent color 2)
- * Terracotta: #BC6C25 (highlight color)
+/* Original Color Palette
+ * Dark Brown: #4A3829
+ * Medium Brown: #7D5A50
+ * Light Taupe: #B9A89B
+ * Sand: #D9CAB3
+ * Cream: #F6F2E9
+ * Sage Green: #8A9A5B
  */
 
-/* Background Styles */
+/* Base Styles */
+.root {
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+    -fx-background-color: #F9F5EB;
+}
+
+/* Welcome Screen Styles - Updated to remove brown card */
+.welcome-background {
+    -fx-background-color: #F2E8CF;
+}
+
+.welcome-container {
+    -fx-padding: 30px;
+    -fx-spacing: 25px;
+    -fx-max-width: 600px;
+}
+
+.logo-container {
+    /* Changed from brown to a sandy/neutral color */
+    -fx-background-color: #D9CAB3;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 5);
+    -fx-max-width: 400px;
+    -fx-alignment: center;
+}
+
+.welcome-title {
+    -fx-font-size: 40px;
+    -fx-font-family: "Gotham Bold", "Segoe UI Bold", "Arial Bold", sans-serif;
+    -fx-font-weight: bold;
+    /* Darker text for better contrast on the lighter background */
+    -fx-text-fill: #3A2D1F;
+}
+
+.welcome-slogan {
+    -fx-font-size: 20px;
+    -fx-font-family: "Gotham Light", "Segoe UI Light", "Arial", sans-serif;
+    -fx-font-style: italic;
+    /* Darker text for better contrast on the lighter background */
+    -fx-text-fill: #5C4033;
+}
+
+.welcome-subtitle {
+    -fx-font-size: 22px;
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #5C4033;
+}
+
+.welcome-button {
+    -fx-background-color: #AA6C39;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.welcome-button:hover {
+    -fx-background-color: #8B4513;
+}
+
+.button-container {
+    -fx-padding: 10px 0;
+    -fx-spacing: 30px;
+}
+
+/* Main UI Styles */
 .background {
-    -fx-background-color: #F6F2E9;
-    background-color: #F6F2E9;
+    -fx-background-color: #F9F5EB;
 }
 
-.main-pane {
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-border-color: #D9CAB3;
-    -fx-border-width: 1px;
-}
-
-.main-pane-1, .main-pane-2, .main-pane-3, .main-pane-4, .main-pane-5 {
-    -fx-background-image: url("../images/cafe-background.jpg");
-    -fx-background-size: cover;
-    -fx-background-position: center;
-}
-
-/* Text Styles */
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Gotham Book", "Segoe UI", sans-serif;
-    -fx-text-fill: #4A3829;
-    -fx-opacity: 0.9;
+    -fx-text-fill: #3A2D1F; /* Darker text for better readability */
 }
 
 .label-bright {
     -fx-font-size: 11pt;
-    -fx-font-family: "Gotham Bold", "Segoe UI Semibold", sans-serif;
-    -fx-text-fill: #4A3829;
-    -fx-opacity: 1;
+    -fx-text-fill: #212121;
 }
 
 .label-header {
-    -fx-font-size: 24pt;
-    -fx-font-family: "Gotham Bold", "Segoe UI Light", sans-serif;
-    -fx-text-fill: #4A3829;
-    -fx-opacity: 1;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Gotham Medium", "Segoe UI Semibold", "Arial", sans-serif;
+    -fx-text-fill: #5C4033;
 }
 
-/* UI Component Styles */
-.stack-pane {
-    -fx-background-color: #F6F2E9;
-}
-
-.pane-with-border {
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-border-color: #D9CAB3;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-}
-
-/* Detail Panel Styling */
-.detail-panel {
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
-    -fx-border-color: #D9CAB3;
-    -fx-border-width: 1px;
-    -fx-padding: 10px;
-}
-
-.detail-header {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #4A3829;
-    -fx-padding: 0 0 10px 0;
-}
-
-.detail-label {
-    -fx-font-size: 11px;
-    -fx-text-fill: #7D5A50;
-    -fx-font-weight: bold;
-}
-
-.detail-value {
-    -fx-font-size: 14px;
-    -fx-text-fill: #4A3829;
-}
-
-.section-header {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #7D5A50;
-    -fx-padding: 5px 0;
-}
-
-/* Command Box Styling */
-.command-box {
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-border-color: #D9CAB3;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-}
-
-#commandTextField {
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-background-insets: 0;
-    -fx-border-color: #D9CAB3;
-    -fx-border-insets: 0;
-    -fx-border-width: 1;
-    -fx-font-family: "Gotham Book", "Segoe UI Light", serif;
-    -fx-font-size: 13pt;
-    -fx-text-fill: #4A3829;
-}
-
-.result-display {
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-font-family: "Gotham Book", "Segoe UI Light", serif;
-    -fx-font-size: 13pt;
-    -fx-text-fill: #4A3829;
-    -fx-border-color: #D9CAB3;
-    -fx-border-width: 1px;
-    -fx-border-radius: 5px;
-}
-
-.result-display .label {
-    -fx-text-fill: #4A3829 !important;
-}
-
-/* Menu and Status Bar */
-.menu-bar {
-    -fx-background-color: rgba(125, 90, 80, 0.9);
-    -fx-border-color: #D9CAB3;
-    -fx-border-width: 0 0 1px 0;
-}
-
-.menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Gotham Light", "Segoe UI Light", serif;
-    -fx-text-fill: #F6F2E9;
-    -fx-opacity: 0.9;
-}
-
-.context-menu {
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-border-color: #D9CAB3;
-}
-
-.context-menu .label {
-    -fx-text-fill: #4A3829;
-}
-
-.status-bar {
-    -fx-background-color: rgba(125, 90, 80, 0.9);
-}
-
-.status-bar .label {
-    -fx-font-family: "Gotham Light", "Segoe UI Light";
-    -fx-text-fill: #F6F2E9;
-    -fx-padding: 4px;
-    -fx-pref-height: 30px;
-}
-
-/* Tab Styling */
 .tab-pane {
-    -fx-background-color: rgba(246, 242, 233, 0.85);
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 0 0 0 1;
 }
 
 .tab-pane .tab-header-area {
     -fx-padding: 0 0 0 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
 }
 
-.tab {
-    -fx-background-color: #B9A89B;
-    -fx-background-radius: 3 3 0 0;
-    -fx-padding: 8px 15px;
+.table-view {
+    -fx-base: #F2E8CF;
+    -fx-control-inner-background: #F9F5EB;
+    -fx-background-color: #F9F5EB;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
 }
 
-.tab:selected {
-    -fx-background-color: #7D5A50;
+.table-view .column-header-background {
+    -fx-background-color: transparent;
 }
 
-.tab-label {
-    -fx-font-family: "Gotham Bold", "Segoe UI", serif;
-    -fx-font-size: 14px;
-    -fx-text-fill: #F6F2E9;
-    -fx-font-weight: bold;
+.table-view .column-header, .table-view .filler {
+    -fx-size: 35;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent derive(-fx-base, 80%) transparent;
+    -fx-border-insets: 0 10 1 0;
 }
 
-/* List Styling */
+.table-view .column-header .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Gotham Medium", "Segoe UI Semibold", "Arial", sans-serif;
+    -fx-text-fill: #5C4033;
+    -fx-alignment: center-left;
+    -fx-opacity: 1;
+}
+
+.table-view:focused .table-row-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color;
+}
+
+.split-pane:horizontal > .split-pane-divider {
+    -fx-border-color: transparent #F9F5EB transparent #F9F5EB;
+    -fx-background-color: transparent, derive(#F9F5EB, 10%);
+}
+
+.split-pane {
+    -fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: #F9F5EB;
+}
+
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: transparent;
+    -fx-background-color: #F9F5EB;
 }
 
 .list-cell {
-    -fx-background-color: transparent;
-    -fx-padding: 5px 0;
+    -fx-label-padding: 2 0 2 5;
+    -fx-graphic-text-gap: 0;
+    -fx-padding: 5 2 5 2;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: rgba(246, 242, 233, 0.6);
+    -fx-background-color: #F2E8CF;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: rgba(217, 202, 179, 0.4);
+    -fx-background-color: #F9F5EB;
 }
 
+/* Improved contrast for highlighted cells */
 .list-cell:filled:selected {
-    -fx-background-color: rgba(125, 90, 80, 0.7);
+    -fx-background-color: #AA6C39;
 }
 
-.list-cell:filled:selected .cell-name,
-.list-cell:filled:selected .cell-details,
-.list-cell:filled:selected .cell-id {
-    -fx-text-fill: #F6F2E9;
+.list-cell:filled:selected .label {
+    -fx-text-fill: white; /* White text for better contrast on selected items */
+    -fx-font-weight: bold; /* Bold for better visibility */
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #BC6C25;
-    -fx-border-width: 2;
+    -fx-border-color: #AA6C39;
+    -fx-border-width: 1;
 }
 
-/* Card Styling */
+.list-cell .label {
+    -fx-text-fill: #3A2D1F; /* Darker text for better readability */
+}
+
+.cell_big_label {
+    -fx-font-family: "Gotham Medium", "Segoe UI Semibold", "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #3A2D1F;
+}
+
+.cell_small_label {
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #3A2D1F;
+}
+
+.anchor-pane {
+    -fx-background-color: #F9F5EB;
+}
+
+.pane-with-border {
+    -fx-background-color: #F9F5EB;
+    -fx-border-color: derive(#F9F5EB, 10%);
+    -fx-border-top-width: 1px;
+}
+
+.status-bar {
+    -fx-background-color: #F2E8CF;
+}
+
+.result-display {
+    -fx-background-color: #F9F5EB;
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 12pt;
+    -fx-text-fill: #3A2D1F;
+}
+
+.result-display .label {
+    -fx-text-fill: #000000 !important;
+}
+
+.status-bar .label {
+    -fx-font-family: "Gotham Book", "Segoe UI Light", "Arial", sans-serif;
+    -fx-text-fill: #5C4033;
+    -fx-padding: 4px;
+}
+
+.status-bar-with-border {
+    -fx-background-color: #F2E8CF;
+    -fx-border-color: derive(#F2E8CF, 25%);
+    -fx-border-width: 1px;
+}
+
+.status-bar-with-border .label {
+    -fx-text-fill: #5C4033;
+}
+
+.grid-pane {
+    -fx-background-color: #F9F5EB;
+    -fx-border-color: derive(#F9F5EB, 30%);
+    -fx-border-width: 1px;
+}
+
+.grid-pane .stack-pane {
+    -fx-background-color: #F9F5EB;
+}
+
+.context-menu {
+    -fx-background-color: #F2E8CF;
+}
+
+.context-menu .label {
+    -fx-text-fill: #2D2310; /* Darker text for dropdown menus */
+    -fx-font-weight: normal;
+}
+
+/* Improved menu bar with darker text */
+.menu-bar {
+    -fx-background-color: #5C4033;
+}
+
+.menu-bar .label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Gotham Book", "Segoe UI Light", "Arial", sans-serif;
+    -fx-text-fill: white;
+    -fx-opacity: 1.0; /* Full opacity for better visibility */
+}
+
+/* Dropdown menu items in File menu */
+.menu-item {
+    -fx-background-color: #F2E8CF;
+}
+
+.menu-item .label {
+    -fx-text-fill: #2D2310; /* Darker text for dropdown menu items */
+    -fx-font-weight: normal;
+}
+
+.menu-item:focused, .menu-item:hover {
+    -fx-background-color: #AA6C39;
+}
+
+.menu-item:focused .label, .menu-item:hover .label {
+    -fx-text-fill: white;
+}
+
+.menu .left-container {
+    -fx-background-color: black;
+}
+
+.text-field {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+}
+
+.text-field:focused {
+    -fx-border-color: #AA6C39;
+    -fx-border-width: 1;
+}
+
+/* Command box */
+.command-box {
+    -fx-background-color: #F2E8CF;
+}
+
+.command-box .text-field {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: #AA6C39;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13pt;
+    -fx-text-fill: #3A2D1F;
+}
+
+.command-box .text-field:focused {
+    -fx-border-color: #8B4513;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #AA6C39;
+    -fx-text-fill: white;
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 12pt;
+    -fx-background-radius: 5;
+    -fx-padding: 5 22 5 22;
+}
+
+.button:hover {
+    -fx-background-color: #8B4513;
+}
+
+.button:pressed, .button:default:hover:pressed {
+    -fx-background-color: #5C4033;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:disabled, .button:default:disabled {
+    -fx-opacity: 0.4;
+    -fx-background-color: #AA6C39;
+    -fx-text-fill: white;
+}
+
+.button:default {
+    -fx-background-color: #8B4513;
+    -fx-text-fill: white;
+}
+
+.button:default:hover {
+    -fx-background-color: #5C4033;
+}
+
+/* Card Panes */
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-border-width: 1;
-    -fx-border-radius: 5;
-    -fx-padding: 5px;
+    -fx-border-width: 0;
 }
 
-.person-card {
-    -fx-background-color: transparent;
-    -fx-padding: 5px;
-    -fx-border-radius: 5px;
-}
-
-.cell-id {
-    -fx-font-family: "Gotham Bold", "Segoe UI", sans-serif;
-    -fx-font-size: 16px;
-    -fx-text-fill: #7D5A50;
-    -fx-font-weight: bold;
-}
-
-.cell-name {
-    -fx-font-family: "Gotham Bold", "Segoe UI Semibold", sans-serif;
-    -fx-font-size: 16px;
-    -fx-text-fill: #4A3829;
-}
-
-.cell-details {
-    -fx-font-family: "Gotham Book", "Segoe UI", sans-serif;
-    -fx-font-size: 13px;
-    -fx-text-fill: #4A3829;
-    -fx-opacity: 0.9;
-}
-
-/* Tag Styling */
-.tag {
-    -fx-text-fill: #F6F2E9;
-    -fx-background-color: #8A9A5B;
-    -fx-padding: 1px 5px;
-    -fx-border-radius: 3px;
-    -fx-background-radius: 3px;
-    -fx-font-size: 11px;
-}
-
-#tags {
-    -fx-hgap: 5;
-    -fx-vgap: 3;
-}
-
-/* Scroll Bar Styling */
+/* Scroll Bar */
 .scroll-bar {
-    -fx-background-color: rgba(217, 202, 179, 0.6);
+    -fx-background-color: derive(#F9F5EB, 20%);
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #7D5A50;
-    -fx-background-radius: 3px;
+    -fx-background-color: derive(#AA6C39, 50%);
+    -fx-background-insets: 3;
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -316,55 +411,133 @@
     -fx-shape: " ";
 }
 
-/* Error Styling */
-.error {
-    -fx-text-fill: #BC6C25 !important;
-    -fx-border-color: #BC6C25;
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
 }
 
-/* Button Styling */
-.button {
-    -fx-padding: 5 22 5 22;
-    -fx-border-color: #B9A89B;
-    -fx-border-width: 2;
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+/* Tab View */
+.tab-pane {
+    -fx-tab-min-width: 90px;
+}
+
+.tab {
+    -fx-background-insets: 0 1 0 1, 0, 0;
+    -fx-background-color: #AA6C39;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #AA6C39;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #8B4513;
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-size: 12pt;
+    -fx-font-family: "Gotham Book", "Segoe UI", "Arial", sans-serif;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+}
+
+/* Staff Details Panel */
+.staff-details {
+    -fx-background-color: #F2E8CF;
     -fx-background-radius: 5;
-    -fx-background-color: rgba(246, 242, 233, 0.9);
-    -fx-font-family: "Gotham Book", "Segoe UI", Helvetica, Arial, sans-serif;
-    -fx-font-size: 11pt;
-    -fx-text-fill: #4A3829;
-    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-spacing: 5;
 }
 
-.button:hover {
-    -fx-background-color: #D9CAB3;
+.staff-details .label {
+    -fx-font-size: 12pt;
 }
 
-.button:pressed, .button:default:hover:pressed {
-    -fx-background-color: #7D5A50;
-    -fx-text-fill: #F6F2E9;
-}
-
-.button:focused {
-    -fx-border-color: #BC6C25, #BC6C25;
-    -fx-border-width: 1, 1;
-    -fx-border-style: solid, segments(1, 1);
-    -fx-border-radius: 0, 0;
-    -fx-border-insets: 1 1 1 1, 0;
-}
-
-.button:default {
-    -fx-background-color: #7D5A50;
-    -fx-text-fill: #F6F2E9;
-}
-
-.button:default:hover {
-    -fx-background-color: #BC6C25;
-}
-
-/* No Selection Message */
-.no-selection-message {
+.staff-details .title {
     -fx-font-size: 14pt;
-    -fx-text-fill: #7D5A50;
-    -fx-opacity: 0.8;
-    -fx-padding: 20px;
+    -fx-font-family: "Gotham Medium", "Segoe UI Semibold", "Arial", sans-serif;
+    -fx-text-fill: #5C4033;
+}
+
+/* Customer Details Panel */
+.customer-details {
+    -fx-background-color: #F2E8CF;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-spacing: 5;
+}
+
+.customer-details .label {
+    -fx-font-size: 12pt;
+}
+
+.customer-details .title {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Gotham Medium", "Segoe UI Semibold", "Arial", sans-serif;
+    -fx-text-fill: #5C4033;
+}
+
+/* Drink Details Panel */
+.drink-details {
+    -fx-background-color: #F2E8CF;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+    -fx-spacing: 5;
+}
+
+.drink-details .label {
+    -fx-font-size: 12pt;
+}
+
+.drink-details .title {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Gotham Medium", "Segoe UI Semibold", "Arial", sans-serif;
+    -fx-text-fill: #5C4033;
+}
+
+/* Tag styles with improved colors */
+.tag-box {
+    -fx-background-color: transparent;
+}
+
+/* Base tag style */
+.tag {
+    -fx-background-color: #8A9A5B;
+    -fx-text-fill: white;
+    -fx-padding: 2 5 2 5;
+    -fx-background-radius: 3;
+    -fx-font-size: 11pt;
+    -fx-font-weight: bold; /* Bold for better visibility */
+}
+
+/* Role-specific tag colors */
+.fulltime-tag, .fulltime {
+    -fx-background-color: #8A9A5B; /* full-time tags */
+    -fx-text-fill: white;
+}
+
+.manager-tag, .manager {
+    -fx-background-color: #7D886E; /* manager tags */
+    -fx-text-fill: white;
+}
+
+.barista-tag, .barista {
+    -fx-background-color: #737144; /* barista tags */
+    -fx-text-fill: white;
+}
+
+.chef-tag, .chef, .parttime {
+    -fx-background-color: #B45F04; /* chef & part-time tags */
+    -fx-text-fill: white;
 }

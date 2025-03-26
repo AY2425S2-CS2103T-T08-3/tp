@@ -33,7 +33,6 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.ui.BackgroundImageManager;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 import seedu.address.ui.WelcomeScreen;
@@ -53,13 +52,29 @@ public class MainApp extends Application {
     protected Config config;
     protected Ui ui;
 
+    // Flag to indicate if the app is running in test mode
+    private boolean isTestMode = false;
+
+    /**
+     * Sets the application to run in test mode.
+     * In test mode, UI components that might cause test failures (like WelcomeScreen) are bypassed.
+     *
+     * @param testMode true to enable test mode, false otherwise
+     */
+    public void setTestMode(boolean testMode) {
+        this.isTestMode = testMode;
+    }
+
+    public boolean isTestMode() {
+        return isTestMode;
+    }
+
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing CafeConnect ]===========================");
         super.init();
 
         loadCustomFonts();
-        BackgroundImageManager.preloadBackgroundImages();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
@@ -99,8 +114,7 @@ public class MainApp extends Application {
             });
             logger.info("Gotham fonts loaded successfully");
         } catch (Exception e) {
-            logger.severe("Failed to load Gotham fonts: " + e.getMessage());
-            e.printStackTrace();
+            logger.warning("Failed to load Gotham fonts (this is expected in test environments): " + e.getMessage());
         }
     }
 
@@ -125,6 +139,16 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting CafeConnect " + MainApp.VERSION);
+
+        // Skip welcome screen in test mode to avoid resource loading issues
+        if (isTestMode) {
+            logger.info("Running in test mode - bypassing welcome screen");
+            // Let the UiManager handle the UI initialization in test mode
+            ui.start(primaryStage);
+            return;
+        }
+
+        // Normal application flow with welcome screen
         WelcomeScreen welcomeScreen = new WelcomeScreen(primaryStage, logic, (UiManager) ui);
         welcomeScreen.show();
     }
