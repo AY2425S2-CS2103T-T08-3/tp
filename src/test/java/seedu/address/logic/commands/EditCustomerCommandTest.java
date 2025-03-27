@@ -48,7 +48,7 @@ public class EditCustomerCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs(), getTypicalDrinkCatalog());
-        expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        expectedModel.setPerson(model.getFilteredCustomerList().get(0), editedCustomer);
 
         assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
     }
@@ -72,7 +72,7 @@ public class EditCustomerCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs(), getTypicalDrinkCatalog());
-        expectedModel.setCustomer(lastCustomer, editedCustomer);
+        expectedModel.setPerson(lastCustomer, editedCustomer);
 
         assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
     }
@@ -109,7 +109,7 @@ public class EditCustomerCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
             new UserPrefs(), getTypicalDrinkCatalog());
-        expectedModel.setCustomer(model.getFilteredCustomerList().get(0), editedCustomer);
+        expectedModel.setPerson(model.getFilteredCustomerList().get(0), editedCustomer);
 
         assertCommandSuccess(editCustomerCommand, model, expectedMessage, expectedModel);
     }

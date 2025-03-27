@@ -187,10 +187,10 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         for (Staff sampleStaff : getSampleStaff()) {
-            sampleAb.addStaff(sampleStaff);
+            sampleAb.addPerson(sampleStaff);
         }
         for (Customer sampleCustomer : getSampleCustomers()) {
-            sampleAb.addCustomer(sampleCustomer);
+            sampleAb.addPerson(sampleCustomer);
         }
         return sampleAb;
     }

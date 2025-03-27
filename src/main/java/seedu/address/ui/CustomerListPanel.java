@@ -46,7 +46,7 @@ public class CustomerListPanel extends UiPart<Region> {
      *
      * @param handler the function to call when a customer is selected
      */
-    public void setCustomerSelectionHandler(Consumer<Customer> handler) {
+    public void setPersonSelectionHandler(Consumer<Customer> handler) {
         this.selectionHandler = handler;
     }
 

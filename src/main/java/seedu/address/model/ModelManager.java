@@ -25,12 +25,10 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Staff> filteredStaffs;
     private final FilteredList<Customer> filteredCustomers;
-    private final DrinkCatalog drinkCatalog;
     private final FilteredList<Drink> filteredDrinks;
-
+    private final DrinkCatalog drinkCatalog;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,11 +42,9 @@ public class ModelManager implements Model {
         this.drinkCatalog = new DrinkCatalog(drinkCatalog);
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredStaffs = new FilteredList<>(this.addressBook.getStaffList());
-        filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
+        filteredStaffs = this.addressBook.getStaffList();
+        filteredCustomers = this.addressBook.getCustomerList();
         filteredDrinks = new FilteredList<>(this.drinkCatalog.getDrinkList());;
-
     }
 
     public ModelManager() {
@@ -109,19 +105,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasStaff(Staff staffMember) {
-        requireAllNonNull(staffMember);
-        return addressBook.hasStaff(staffMember);
-    }
-
-    @Override
-    public boolean hasCustomer(Customer customer) {
-        requireNonNull(customer);
-        return addressBook.hasCustomer(customer);
-    }
-
-
-    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -129,7 +112,6 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -137,6 +119,7 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredStaffs.setPredicate(predicate);
     }
+    
     @Override
     public void updateFilteredCustomerList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -144,63 +127,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addStaff(Staff staffMember) {
-        addressBook.addStaff(staffMember);
-        updateFilteredStaffList(PREDICATE_SHOW_ALL_STAFFS);
-    }
-
-    @Override
-    public void deleteStaff(Staff staffMember) {
-        requireNonNull(staffMember);
-        addressBook.removeStaff(staffMember);
-        updateFilteredStaffList(PREDICATE_SHOW_ALL_STAFFS);
-    }
-
-    @Override
-    public void addCustomer(Customer customer) {
-        addressBook.addCustomer(customer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-    }
-
-    @Override
-    public void deleteCustomer(Customer customer) {
-        requireNonNull(customer);
-        addressBook.removeCustomer(customer);
-        updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-    }
-
-
-    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
-    public void setStaff(Staff target, Staff editedStaff) {
-        requireAllNonNull(target, editedStaff);
-
-        addressBook.setStaff(target, editedStaff);
-    }
-
-    @Override
-    public void setCustomer(Customer target, Customer editedCustomer) {
-        requireAllNonNull(target, editedCustomer);
-
-        addressBook.setCustomer(target, editedCustomer);
-    }
     //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
     @Override
     public ObservableList<Staff> getFilteredStaffList() {
         return filteredStaffs;
@@ -209,12 +141,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Customer> getFilteredCustomerList() {
         return filteredCustomers;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
     }
 
     @Override
@@ -231,7 +157,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredCustomers.equals(otherModelManager.filteredCustomers)
+                && filteredStaffs.equals(otherModelManager.filteredStaffs)
                 && drinkCatalog.equals(otherModelManager.drinkCatalog)
                 && filteredDrinks.equals(otherModelManager.filteredDrinks);
     }
@@ -289,5 +216,4 @@ public class ModelManager implements Model {
     public void setDrinkCatalog(ReadOnlyDrinkCatalog drinkCatalog) {
         this.drinkCatalog.resetData(drinkCatalog);
     }
-
 }

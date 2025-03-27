@@ -119,29 +119,29 @@ public class AddressBookTest {
         addressBook.addStaff(BEN);
         Staff editedBen = new StaffBuilder(BEN).withTags(VALID_TAG_FRIEND).build();
         addressBook.setStaff(BEN, editedBen);
-        assertTrue(addressBook.hasStaff(editedBen));
+        assertTrue(addressBook.hasPerson(editedBen));
     }
 
     @Test
-    public void hasStaff_nullStaff_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasStaff(null));
+    public void hasPerson_nullStaff_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
     }
 
     @Test
-    public void hasStaff_staffNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasStaff(BEN));
+    public void hasPerson_staffNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPerson(BEN));
     }
 
     @Test
-    public void hasStaff_staffInAddressBook_returnsTrue() {
+    public void hasPerson_staffInAddressBook_returnsTrue() {
         addressBook.addStaff(BEN);
-        assertTrue(addressBook.hasStaff(BEN));
+        assertTrue(addressBook.hasPerson(BEN));
     }
 
     @Test
     public void addStaff_validStaff_success() {
         addressBook.addStaff(BEN);
-        assertTrue(addressBook.hasStaff(BEN));
+        assertTrue(addressBook.hasPerson(BEN));
     }
 
     @Test
@@ -153,23 +153,23 @@ public class AddressBookTest {
     public void removeStaff_staffInAddressBook_removesSuccessfully() {
         addressBook.addStaff(BEN);
         addressBook.removeStaff(BEN);
-        assertFalse(addressBook.hasStaff(BEN));
+        assertFalse(addressBook.hasPerson(BEN));
     }
 
     @Test
-    public void hasCustomer_nullCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasCustomer(null));
+    public void hasPerson_nullCustomer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
     }
 
     @Test
-    public void hasCustomer_customerNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasCustomer(JAMES));
+    public void hasPerson_customerNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPerson(JAMES));
     }
 
     @Test
-    public void hasCustomer_customerInAddressBook_returnsTrue() {
+    public void hasPerson_customerInAddressBook_returnsTrue() {
         addressBook.addCustomer(JAMES);
-        assertTrue(addressBook.hasCustomer(JAMES));
+        assertTrue(addressBook.hasPerson(JAMES));
     }
 
     @Test

@@ -21,13 +21,13 @@ public class StaffTest {
     }
 
     @Test
-    public void isSameStaff() {
+    public void isSamePerson() {
         // same object -> returns true
-        assertTrue(ALEX.isSameStaff(ALEX));
+        assertTrue(ALEX.isSamePerson(ALEX));
 
         // Different staffId, same name, different phone, rest same -> returns false
         Staff editedBen = new StaffBuilder(BEN).withStaffId("S1005").withPhone("91234567").build();
-        assertFalse(BEN.isSameStaff(editedBen));
+        assertFalse(BEN.isSamePerson(editedBen));
     }
 
     @Test
@@ -43,8 +43,8 @@ public class StaffTest {
     }
 
     @Test
-    public void isSameStaff_nullStaff_returnsFalse() {
-        assertFalse(BEN.isSameStaff(null)); // null -> should return false
+    public void isSamePerson_nullStaff_returnsFalse() {
+        assertFalse(BEN.isSamePerson(null)); // null -> should return false
     }
 
 

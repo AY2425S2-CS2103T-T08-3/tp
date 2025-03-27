@@ -60,16 +60,16 @@ public class Staff extends Person {
      * Returns true if both staff members have the same staff ID.
      * This defines a weaker notion of equality between two staff members.
      */
-    public boolean isSameStaff(Staff otherStaff) {
-        if (otherStaff == this) {
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
             return true;
         }
 
-        if (otherStaff == null) {
+        if (!(otherPerson instanceof Staff)) {
             return false;
         }
 
-        // Compare using staffId, name, or any unique field
+        Staff otherStaff = (Staff) otherPerson;
         return otherStaff.getStaffId().equals(getStaffId());
     }
 
@@ -86,13 +86,13 @@ public class Staff extends Person {
             return false;
         }
 
-        Staff otherStaff = (Staff) other;
-        return super.equals(otherStaff) // Calls the equality check from Person
-                && staffId.equals(otherStaff.staffId)
-                && role.equals(otherStaff.role)
-                && shiftTiming.equals(otherStaff.shiftTiming)
-                && hoursWorked.equals(otherStaff.hoursWorked)
-                && performanceRating.equals(otherStaff.performanceRating);
+        Staff otherPerson = (Staff) other;
+        return super.equals(otherPerson) // Calls the equality check from Person
+                && staffId.equals(otherPerson.staffId)
+                && role.equals(otherPerson.role)
+                && shiftTiming.equals(otherPerson.shiftTiming)
+                && hoursWorked.equals(otherPerson.hoursWorked)
+                && performanceRating.equals(otherPerson.performanceRating);
     }
 
     @Override

@@ -49,7 +49,7 @@ deactivate Model
 
 note right of PurchaseCommand: Handle redemption case
 
-PurchaseCommand -> Model : setCustomer(customerToUpdate, updatedCustomer)
+PurchaseCommand -> Model : setPerson(customerToUpdate, updatedCustomer)
 activate Model
 Model --> PurchaseCommand
 deactivate Model

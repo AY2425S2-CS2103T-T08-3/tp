@@ -49,54 +49,54 @@ public class UniqueCustomerListTest {
     }
 
     @Test
-    public void setCustomer_nullTargetCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setCustomer(null, JAMES));
+    public void setPerson_nullTargetCustomer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setPerson(null, JAMES));
     }
 
     @Test
-    public void setCustomer_nullEditedCustomer_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setCustomer(JAMES, null));
+    public void setPerson_nullEditedCustomer_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setPerson(JAMES, null));
     }
 
     @Test
-    public void setCustomer_targetCustomerNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueCustomerList.setCustomer(JAMES, JAMES));
+    public void setPerson_targetCustomerNotInList_throwsPersonNotFoundException() {
+        assertThrows(PersonNotFoundException.class, () -> uniqueCustomerList.setPerson(JAMES, JAMES));
     }
 
     @Test
-    public void setCustomer_editedCustomerIsSameCustomer_success() {
+    public void setPerson_editedCustomerisSamePerson_success() {
         uniqueCustomerList.add(JAMES);
-        uniqueCustomerList.setCustomer(JAMES, JAMES);
+        uniqueCustomerList.setPerson(JAMES, JAMES);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();
         expectedUniqueCustomerList.add(JAMES);
         assertEquals(expectedUniqueCustomerList, uniqueCustomerList);
     }
 
     @Test
-    public void setCustomer_editedCustomerHasSameIdentity_success() {
+    public void setPerson_editedCustomerHasSameIdentity_success() {
         uniqueCustomerList.add(JAMES);
         Customer editedJames = new CustomerBuilder(JAMES).withAddress("different address").withRewardPoints("300")
                 .withTags("regular").build();
-        uniqueCustomerList.setCustomer(JAMES, editedJames);
+        uniqueCustomerList.setPerson(JAMES, editedJames);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();
         expectedUniqueCustomerList.add(editedJames);
         assertEquals(expectedUniqueCustomerList, uniqueCustomerList);
     }
 
     @Test
-    public void setCustomer_editedCustomerHasDifferentIdentity_success() {
+    public void setPerson_editedCustomerHasDifferentIdentity_success() {
         uniqueCustomerList.add(JAMES);
-        uniqueCustomerList.setCustomer(JAMES, OLIVIA);
+        uniqueCustomerList.setPerson(JAMES, OLIVIA);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();
         expectedUniqueCustomerList.add(OLIVIA);
         assertEquals(expectedUniqueCustomerList, uniqueCustomerList);
     }
 
     @Test
-    public void setCustomer_editedCustomerHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setPerson_editedCustomerHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueCustomerList.add(JAMES);
         uniqueCustomerList.add(OLIVIA);
-        assertThrows(DuplicatePersonException.class, () -> uniqueCustomerList.setCustomer(JAMES, OLIVIA));
+        assertThrows(DuplicatePersonException.class, () -> uniqueCustomerList.setPerson(JAMES, OLIVIA));
     }
 
     @Test
@@ -118,38 +118,38 @@ public class UniqueCustomerListTest {
     }
 
     @Test
-    public void setCustomers_nullUniqueCustomerList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setCustomers((UniqueCustomerList) null));
+    public void setPersons_nullUniqueCustomerList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setPersons((UniqueCustomerList) null));
     }
 
     @Test
-    public void setCustomers_uniqueCustomerList_replacesOwnListWithProvidedUniqueCustomerList() {
+    public void setPersons_uniqueCustomerList_replacesOwnListWithProvidedUniqueCustomerList() {
         uniqueCustomerList.add(JAMES);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();
         expectedUniqueCustomerList.add(OLIVIA);
-        uniqueCustomerList.setCustomers(expectedUniqueCustomerList);
+        uniqueCustomerList.setPersons(expectedUniqueCustomerList);
         assertEquals(expectedUniqueCustomerList, uniqueCustomerList);
     }
 
     @Test
-    public void setCustomers_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setCustomers((List<Customer>) null));
+    public void setPersons_nullList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueCustomerList.setPersons((List<Customer>) null));
     }
 
     @Test
-    public void setCustomers_list_replacesOwnListWithProvidedList() {
+    public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueCustomerList.add(JAMES);
         List<Customer> customerList = Collections.singletonList(OLIVIA);
-        uniqueCustomerList.setCustomers(customerList);
+        uniqueCustomerList.setPersons(customerList);
         UniqueCustomerList expectedUniqueCustomerList = new UniqueCustomerList();
         expectedUniqueCustomerList.add(OLIVIA);
         assertEquals(expectedUniqueCustomerList, uniqueCustomerList);
     }
 
     @Test
-    public void setCustomers_listWithDuplicateCustomers_throwsDuplicatePersonException() {
+    public void setPersons_listWithDuplicateCustomers_throwsDuplicatePersonException() {
         List<Customer> listWithDuplicateCustomers = Arrays.asList(JAMES, JAMES);
-        assertThrows(DuplicatePersonException.class, () -> uniqueCustomerList.setCustomers(listWithDuplicateCustomers));
+        assertThrows(DuplicatePersonException.class, () -> uniqueCustomerList.setPersons(listWithDuplicateCustomers));
     }
 
     @Test

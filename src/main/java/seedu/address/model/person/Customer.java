@@ -61,17 +61,17 @@ public class Customer extends Person {
      * Returns true if both customers have the same identity fields.
      * This defines a weaker notion of equality between two customers.
      */
-    public boolean isSameCustomer(Customer otherCustomer) {
-        if (otherCustomer == this) {
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
             return true;
         }
 
-        if (otherCustomer == null) {
+        if (!(otherPerson instanceof Customer)) {
             return false;
         }
 
         // Using phone number as unique identifier for customers
-        return otherCustomer.getPhone().equals(getPhone());
+        return otherPerson.getPhone().equals(getPhone());
     }
 
     /**

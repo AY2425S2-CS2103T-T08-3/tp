@@ -128,21 +128,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addStaff(Staff staffMember) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setStaff(Staff staffMember, Staff other) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteStaff(Staff staffMember) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -158,11 +143,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasStaff(Staff staffMember) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -173,17 +153,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Staff> getFilteredStaffList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -199,26 +169,6 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredCustomerList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasCustomer(Customer customer) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addCustomer(Customer customer) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteCustomer(Customer customer) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setCustomer(Customer target, Customer editedCustomer) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -308,18 +258,6 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
-        }
-
-        @Override
-        public boolean hasStaff(Staff staffMember) {
-            requireNonNull(staffMember);
-            return staffAdded.contains(staffMember);
-        }
-
-        @Override
-        public void addStaff(Staff staffMember) {
-            requireNonNull(staffMember);
-            staffAdded.add(staffMember);
         }
 
         @Override

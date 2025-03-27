@@ -93,6 +93,9 @@ public class PurchaseCommand extends Command {
         Customer customerToUpdate = lastShownList.get(customerIndex.getZeroBased());
 
         // Find the drink in the catalog
+        // TODO: this violates hand principle. we want to have model directly search for drink
+        // this way, we can implement fuzzy matching there
+        // fuzzy matching should have parameters such as (ratio + distance)
         Optional<Drink> drinkOptional = model.getFilteredDrinkList().stream()
                 .filter(d -> d.getName().equalsIgnoreCase(drinkName))
                 .findFirst();
@@ -121,7 +124,7 @@ public class PurchaseCommand extends Command {
 
         Customer updatedCustomer = createUpdatedCustomerForPurchase(customerToUpdate, price, pointsToAdd);
 
-        model.setCustomer(customerToUpdate, updatedCustomer);
+        model.setPerson(customerToUpdate, updatedCustomer);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
         return new CommandResult(String.format(MESSAGE_PURCHASE_SUCCESS,
@@ -151,7 +154,7 @@ public class PurchaseCommand extends Command {
         // Create updated customer with reduced points but same total spent
         Customer updatedCustomer = createUpdatedCustomerForRedemption(customerToUpdate, pointsNeeded);
 
-        model.setCustomer(customerToUpdate, updatedCustomer);
+        model.setPerson(customerToUpdate, updatedCustomer);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
 
         return new CommandResult(String.format(MESSAGE_REDEMPTION_SUCCESS,

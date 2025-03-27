@@ -319,10 +319,10 @@ public class MainWindow extends UiPart<Stage> {
 
             // Set up selection handlers
             if (staffListPanel != null) {
-                staffListPanel.setStaffSelectionHandler(this::handleStaffSelection);
+                staffListPanel.setPersonSelectionHandler(this::handleStaffSelection);
             }
             if (customerListPanel != null) {
-                customerListPanel.setCustomerSelectionHandler(this::handleCustomerSelection);
+                customerListPanel.setPersonSelectionHandler(this::handleCustomerSelection);
             }
             if (drinkListPanel != null) {
                 drinkListPanel.setDrinkSelectionHandler(this::handleDrinkSelection);

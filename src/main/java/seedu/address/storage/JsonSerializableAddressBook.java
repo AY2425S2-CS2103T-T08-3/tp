@@ -84,18 +84,18 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedStaff jsonAdaptedStaff : staff) {
             Staff staffMember = jsonAdaptedStaff.toModelType();
-            if (addressBook.hasStaff(staffMember)) {
+            if (addressBook.hasPerson(staffMember)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STAFF);
             }
-            addressBook.addStaff(staffMember);
+            addressBook.addPerson(staffMember);
         }
 
         for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
             Customer customer = jsonAdaptedCustomer.toModelType();
-            if (addressBook.hasCustomer(customer)) {
+            if (addressBook.hasPerson(customer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CUSTOMER);
             }
-            addressBook.addCustomer(customer);
+            addressBook.addPerson(customer);
         }
 
         return addressBook;

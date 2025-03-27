@@ -176,7 +176,7 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public boolean hasStaff(Staff staffMember) {
+        public boolean hasPerson(Staff staffMember) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -201,7 +201,7 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public boolean hasCustomer(Customer customer) {
+        public boolean hasPerson(Customer customer) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -216,7 +216,7 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public void setCustomer(Customer target, Customer editedCustomer) {
+        public void setPerson(Customer target, Customer editedCustomer) {
             throw new AssertionError("This method should not be called.");
         }
         @Override
@@ -279,9 +279,9 @@ public class AddStaffCommandTest {
         }
 
         @Override
-        public boolean hasStaff(Staff staffMember) {
+        public boolean hasPerson(Staff staffMember) {
             requireNonNull(staffMember);
-            return this.staff.isSameStaff(staffMember);
+            return this.staff.isSamePerson(staffMember);
         }
     }
 
@@ -289,9 +289,9 @@ public class AddStaffCommandTest {
         final ArrayList<Staff> staffAdded = new ArrayList<>();
 
         @Override
-        public boolean hasStaff(Staff staffMember) {
+        public boolean hasPerson(Staff staffMember) {
             requireNonNull(staffMember);
-            return staffAdded.stream().anyMatch(staffMember::isSameStaff);
+            return staffAdded.stream().anyMatch(staffMember::isSamePerson);
         }
 
         @Override

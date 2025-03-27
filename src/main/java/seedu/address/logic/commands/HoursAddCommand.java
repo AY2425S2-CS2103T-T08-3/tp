@@ -64,7 +64,7 @@ public class HoursAddCommand extends Command {
                 updatedHoursWorked, staffToUpdate.getPerformanceRating()
         );
 
-        model.setStaff(staffToUpdate, updatedStaff);
+        model.setPerson(staffToUpdate, updatedStaff);
         return new CommandResult(String.format(MESSAGE_SUCCESS, updatedStaff.getName(),
                 currentHours, newHours));
     }

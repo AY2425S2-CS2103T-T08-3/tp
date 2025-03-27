@@ -73,12 +73,12 @@ public class AddStaffCommand extends Command {
         requireNonNull(model);
         logger.info("Executing AddStaffCommand for staff: " + toAdd.getName());
 
-        if (model.hasStaff(toAdd)) {
+        if (model.hasPerson(toAdd)) {
             logger.warning("Attempted to add duplicate staff: " + toAdd.getName());
             throw new CommandException(MESSAGE_DUPLICATE_STAFF);
         }
 
-        model.addStaff(toAdd);
+        model.addPerson(toAdd);
         logger.info("Successfully added staff: " + toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

@@ -118,12 +118,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasStaff_nullOrNonExistentStaff_handledCorrectly() {
-        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasStaff(null));
-        assertFalse(modelManager.hasStaff(ALEX));
+    public void hasPerson_nullOrNonExistentStaff_handledCorrectly() {
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+        assertFalse(modelManager.hasPerson(ALEX));
 
         modelManager.addStaff(ALEX);
-        assertTrue(modelManager.hasStaff(ALEX));
+        assertTrue(modelManager.hasPerson(ALEX));
     }
 
     @Test

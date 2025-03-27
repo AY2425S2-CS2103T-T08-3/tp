@@ -16,7 +16,6 @@ import seedu.address.model.person.Staff;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Person> PREDICATE_SHOW_ALL_STAFFS = unused -> true;
     Predicate<Person> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
     Predicate<Drink> PREDICATE_SHOW_ALL_DRINKS = unused -> true;
@@ -65,16 +64,6 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a staff with the same identity as {@code staff} exists in the address book.
-     */
-    boolean hasStaff(Staff staffMember);
-
-    /**
-     * Returns true if a customer with the same identity as {@code customer} exists
-     */
-    boolean hasCustomer(Customer customer);
-
-    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -87,65 +76,17 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Adds the given staff.
-     * {@code staff} must not already exist in the address book.
-     */
-    void addStaff(Staff staffMember);
-
-    /**
-     * Deletes the given customer.
-     * The customer must exist in the address book.
-     */
-    void deleteStaff(Staff staff);
-
-    /**
-     * Adds the given customer
-     */
-    void addCustomer(Customer customer);
-
-    /**
-     * Deletes the given customer.
-     * The customer must exist in the address book.
-     */
-    void deleteCustomer(Customer customer);
-
-    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
 
-    /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    void setStaff(Staff target, Staff editedPerson);
-
-    /**
-     * Replaces the given customer {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same
-     * as another existing customer in the address book.
-     */
-    void setCustomer(Customer target, Customer editedCustomer);
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Staff> getFilteredStaffList();
 
-
     /** Returns an unmodifiable view of the filtered customer list */
     ObservableList<Customer> getFilteredCustomerList();
-
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

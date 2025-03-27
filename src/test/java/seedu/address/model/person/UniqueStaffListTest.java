@@ -73,7 +73,7 @@ public class UniqueStaffListTest {
     }
 
     @Test
-    public void setStaff_editedStaffIsSameStaff_success() {
+    public void setStaff_editedStaffisSamePerson_success() {
         uniqueStaffList.add(ALEX);
         uniqueStaffList.setStaff(ALEX, ALEX);
         UniqueStaffList expectedUniqueStaffList = new UniqueStaffList();

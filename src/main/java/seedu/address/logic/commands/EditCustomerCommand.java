@@ -98,11 +98,11 @@ public class EditCustomerCommand extends Command {
         Customer customerToEdit = lastShownList.get(index.getZeroBased());
         Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
-        if (!customerToEdit.isSameCustomer(editedCustomer) && model.hasCustomer(editedCustomer)) {
+        if (!customerToEdit.isSamePerson(editedCustomer) && model.hasPerson(editedCustomer)) {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
-        model.setCustomer(customerToEdit, editedCustomer);
+        model.setPerson(customerToEdit, editedCustomer);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
         return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, Messages.format(editedCustomer)));
     }
@@ -179,7 +179,7 @@ public class EditCustomerCommand extends Command {
          */
         public EditCustomerDescriptor(EditCustomerDescriptor toCopy) {
             super(toCopy);
-            setCustomerId(toCopy.customerId);
+            setPersonId(toCopy.customerId);
             setRewardPoints(toCopy.rewardPoints);
             setVisitCount(toCopy.visitCount);
             setFavouriteItem(toCopy.favouriteItem);
@@ -196,7 +196,7 @@ public class EditCustomerCommand extends Command {
             return Optional.ofNullable(customerId);
         }
 
-        public void setCustomerId(CustomerId customerId) {
+        public void setPersonId(CustomerId customerId) {
             this.customerId = customerId;
         }
 

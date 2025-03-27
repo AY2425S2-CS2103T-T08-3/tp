@@ -46,7 +46,7 @@ public class StaffListPanel extends UiPart<Region> {
      *
      * @param handler the function to call when a staff is selected
      */
-    public void setStaffSelectionHandler(Consumer<Staff> handler) {
+    public void setPersonSelectionHandler(Consumer<Staff> handler) {
         this.selectionHandler = handler;
     }
 

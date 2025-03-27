@@ -66,7 +66,7 @@ public class EditStaffCommandParser implements Parser<EditStaffCommand> {
             editStaffDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_STAFF_ID).isPresent()) {
-            editStaffDescriptor.setStaffId(ParserUtil.parseStaffId(argMultimap.getValue(PREFIX_STAFF_ID).get()));
+            editStaffDescriptor.setPersonId(ParserUtil.parseStaffId(argMultimap.getValue(PREFIX_STAFF_ID).get()));
         }
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
             editStaffDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));

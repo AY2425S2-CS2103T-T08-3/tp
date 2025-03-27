@@ -70,7 +70,7 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
             editCustomerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_CUSTOMER_ID).isPresent()) {
-            editCustomerDescriptor.setCustomerId(
+            editCustomerDescriptor.setPersonId(
                     ParserUtil.parseCustomerId(argMultimap.getValue(PREFIX_CUSTOMER_ID).get()));
         }
         if (argMultimap.getValue(PREFIX_REWARD_POINTS).isPresent()) {

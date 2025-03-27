@@ -21,13 +21,13 @@ public class CustomerTest {
     }
 
     @Test
-    public void isSameCustomer() {
+    public void isSamePerson() {
         // same object -> returns true
-        assertTrue(JAMES.isSameCustomer(JAMES));
+        assertTrue(JAMES.isSamePerson(JAMES));
 
         // Different phone, rest same -> returns false
         Customer editedJames = new CustomerBuilder(JAMES).withPhone("91234567").build();
-        assertFalse(JAMES.isSameCustomer(editedJames));
+        assertFalse(JAMES.isSamePerson(editedJames));
     }
 
     @Test
@@ -43,8 +43,8 @@ public class CustomerTest {
     }
 
     @Test
-    public void isSameCustomer_nullCustomer_returnsFalse() {
-        assertFalse(OLIVIA.isSameCustomer(null)); // null -> should return false
+    public void isSamePerson_nullCustomer_returnsFalse() {
+        assertFalse(OLIVIA.isSamePerson(null)); // null -> should return false
     }
 
     @Test

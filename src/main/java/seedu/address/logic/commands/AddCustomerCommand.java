@@ -68,11 +68,11 @@ public class AddCustomerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasCustomer(toAdd)) {
+        if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_CUSTOMER);
         }
 
-        model.addCustomer(toAdd);
+        model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

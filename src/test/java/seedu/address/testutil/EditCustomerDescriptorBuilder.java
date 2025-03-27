@@ -42,7 +42,7 @@ public class EditCustomerDescriptorBuilder {
         descriptor.setEmail(customer.getEmail());
         descriptor.setAddress(customer.getAddress());
         descriptor.setTags(customer.getTags());
-        descriptor.setCustomerId(customer.getCustomerId());
+        descriptor.setPersonId(customer.getCustomerId());
         descriptor.setRewardPoints(customer.getRewardPoints());
         descriptor.setVisitCount(customer.getVisitCount());
         descriptor.setFavouriteItem(customer.getFavouriteItem());
@@ -85,7 +85,7 @@ public class EditCustomerDescriptorBuilder {
      * Sets the {@code CustomerId} of the {@code EditCustomerDescriptor} that we are building.
      */
     public EditCustomerDescriptorBuilder withCustomerId(String customerId) {
-        descriptor.setCustomerId(new CustomerId(customerId));
+        descriptor.setPersonId(new CustomerId(customerId));
         return this;
     }
 
