@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Staff;
+import seedu.address.model.util.StaffBuilder;
 
 /**
  * A utility class containing a list of {@code Staff} objects to be used in tests.

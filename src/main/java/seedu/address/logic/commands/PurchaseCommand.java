@@ -8,7 +8,6 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,18 +15,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.drink.Drink;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
-import seedu.address.model.person.CustomerId;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.RewardPoints;
 import seedu.address.model.person.TotalSpent;
 import seedu.address.model.person.VisitCount;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.util.CustomerBuilder;
+
 /**
  * Records a purchase for a customer, updating their total spent and reward points.
  * Can also redeem reward points for a purchase if the redeem flag is set.
@@ -186,32 +179,15 @@ public class PurchaseCommand extends Command {
             double purchaseAmount, int pointsToAdd) {
         assert customerToUpdate != null;
 
-        Name name = customerToUpdate.getName();
-        Phone phone = customerToUpdate.getPhone();
-        Email email = customerToUpdate.getEmail();
-        Address address = customerToUpdate.getAddress();
-        Remark remark = customerToUpdate.getRemark();
-        Set<Tag> tags = customerToUpdate.getTags();
-        CustomerId customerId = customerToUpdate.getCustomerId();
-
-        // Retrieve current reward points and total spent values
         int currentRewardPoints = Integer.parseInt(customerToUpdate.getRewardPoints().value);
         double currentTotalSpent = Double.parseDouble(customerToUpdate.getTotalSpent().value);
         int currentVisitCount = Integer.parseInt(customerToUpdate.getVisitCount().value);
 
-        // Calculate updated values
-        int updatedRewardPoints = currentRewardPoints + pointsToAdd;
-        double updatedTotalSpent = currentTotalSpent + purchaseAmount;
-
-        // Create new RewardPoints and TotalSpent objects
-        RewardPoints newRewardPoints = new RewardPoints(String.valueOf(updatedRewardPoints));
-        TotalSpent newTotalSpent = new TotalSpent(String.format("%.2f", updatedTotalSpent));
-
-        VisitCount visitCount = new VisitCount(String.valueOf(currentVisitCount + 1));
-        FavouriteItem favouriteItem = customerToUpdate.getFavouriteItem();
-
-        return new Customer(name, phone, email, address, remark, tags,
-                customerId, newRewardPoints, visitCount, favouriteItem, newTotalSpent);
+        return new CustomerBuilder(customerToUpdate)
+                .withRewardPoints(new RewardPoints(String.valueOf(currentRewardPoints + pointsToAdd)))
+                .withTotalSpent(new TotalSpent(String.format("%.2f", currentTotalSpent + purchaseAmount)))
+                .withVisitCount(new VisitCount(String.valueOf(currentVisitCount + 1)))
+                .build();
     }
 
     /**
@@ -222,29 +198,13 @@ public class PurchaseCommand extends Command {
     private static Customer createUpdatedCustomerForRedemption(Customer customerToUpdate, int pointsToDeduct) {
         assert customerToUpdate != null;
 
-        Name name = customerToUpdate.getName();
-        Phone phone = customerToUpdate.getPhone();
-        Email email = customerToUpdate.getEmail();
-        Address address = customerToUpdate.getAddress();
-        Remark remark = customerToUpdate.getRemark();
-        Set<Tag> tags = customerToUpdate.getTags();
-        CustomerId customerId = customerToUpdate.getCustomerId();
-        TotalSpent totalSpent = customerToUpdate.getTotalSpent(); // Total spent remains unchanged
-
-        // Retrieve current reward points and visit count values
         int currentRewardPoints = Integer.parseInt(customerToUpdate.getRewardPoints().value);
         int currentVisitCount = Integer.parseInt(customerToUpdate.getVisitCount().value);
 
-        // Calculate updated values
-        int updatedRewardPoints = currentRewardPoints - pointsToDeduct;
-
-        // Create new RewardPoints and increment visit count
-        RewardPoints newRewardPoints = new RewardPoints(String.valueOf(updatedRewardPoints));
-        VisitCount visitCount = new VisitCount(String.valueOf(currentVisitCount + 1));
-        FavouriteItem favouriteItem = customerToUpdate.getFavouriteItem();
-
-        return new Customer(name, phone, email, address, remark, tags,
-                customerId, newRewardPoints, visitCount, favouriteItem, totalSpent);
+        return new CustomerBuilder(customerToUpdate)
+                .withRewardPoints(new RewardPoints(String.valueOf(currentRewardPoints - pointsToDeduct)))
+                .withVisitCount(new VisitCount(String.valueOf(currentVisitCount + 1)))
+                .build();
     }
 
     @Override

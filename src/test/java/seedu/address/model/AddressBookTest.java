@@ -28,9 +28,9 @@ import seedu.address.model.person.Customer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Staff;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.CustomerBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.StaffBuilder;
+import seedu.address.model.util.CustomerBuilder;
+import seedu.address.model.util.PersonBuilder;
+import seedu.address.model.util.StaffBuilder;
 
 public class AddressBookTest {
 

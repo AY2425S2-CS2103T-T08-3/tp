@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalCustomers.OLIVIA;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.CustomerBuilder;
+import seedu.address.model.util.CustomerBuilder;
 
 public class CustomerTest {
 

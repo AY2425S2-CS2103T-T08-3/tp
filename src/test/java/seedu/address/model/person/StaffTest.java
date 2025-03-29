@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalStaff.BEN;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.StaffBuilder;
+import seedu.address.model.util.StaffBuilder;
 
 public class StaffTest {
 

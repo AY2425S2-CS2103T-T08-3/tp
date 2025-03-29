@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Customer;
+import seedu.address.model.util.CustomerBuilder;
 
 /**
  * A utility class containing a list of {@code Customer} objects to be used in tests.
