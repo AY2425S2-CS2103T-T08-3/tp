@@ -29,7 +29,7 @@ public class DrinkName {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test != null && !test.trim().isEmpty();
+        return test != null && !test.trim().isEmpty(); // Ensure the name is not null, blank, or just spaces
     }
 
     public String getDrinkName() {
@@ -45,7 +45,7 @@ public class DrinkName {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof DrinkName
-                && drinkName.equals(((DrinkName) other).drinkName));
+                && drinkName.equalsIgnoreCase(((DrinkName) other).drinkName)); // Case-insensitive comparison
     }
 
     @Override

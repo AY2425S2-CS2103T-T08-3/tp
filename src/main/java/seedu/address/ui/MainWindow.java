@@ -390,7 +390,7 @@ public class MainWindow extends UiPart<Stage> {
      * Handles drink selection from the list.
      */
     private void handleDrinkSelection(Drink drink) {
-        logger.info("Drink selected: " + (drink != null ? drink.getName() : "none"));
+        logger.info("Drink selected: " + (drink != null ? drink.getDrinkName() : "none"));
         lastSelectedDrink = drink;
         if (drinkDetailPanel != null) {
             drinkDetailPanel.updateDrinkDetails(drink);

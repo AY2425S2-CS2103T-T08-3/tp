@@ -9,10 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.UniqueDrinkList;
+import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.HoursWorked;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PerformanceRating;
@@ -25,6 +27,7 @@ import seedu.address.model.person.StaffId;
 import seedu.address.model.person.TotalSpent;
 import seedu.address.model.person.VisitCount;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -179,18 +182,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String favouriteItem} into a {@code FavouriteItem}.
+     * Parses a {@code String favouriteDrink} into a {@code FavouriteDrink}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code favouriteItem} is invalid.
+     * @throws ParseException if the given {@code favouriteDrink} is invalid.
      */
-    public static FavouriteItem parseFavouriteItem(String favouriteItem) throws ParseException {
-        requireNonNull(favouriteItem);
-        String trimmedFavouriteItem = favouriteItem.trim();
-        if (!FavouriteItem.isValidFavouriteItem(trimmedFavouriteItem)) {
-            throw new ParseException(FavouriteItem.MESSAGE_CONSTRAINTS);
+    public static Drink parseFavouriteDrink(String favouriteDrink) throws ParseException {
+        requireNonNull(favouriteDrink);
+        String trimmedFavouriteDrink = favouriteDrink.trim();
+        if (!Drink.isValidDrink(trimmedFavouriteDrink)) {
+            throw new ParseException(Drink.MESSAGE_CONSTRAINTS);
         }
-        return new FavouriteItem(trimmedFavouriteItem);
+        return new Drink(trimmedFavouriteDrink);
     }
 
     /**
@@ -221,6 +224,29 @@ public class ParserUtil {
             throw new ParseException(CustomerId.MESSAGE_CONSTRAINTS);
         }
         return new CustomerId(trimmedCustomerId);
+    }
+
+    /**
+     * Parses a {@code String drinkName} into a {@code Drink}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param drinkName The name of the drink to parse.
+     * @return The Drink object if found.
+     * @throws ParseException if the given {@code drinkName} is invalid or not found.
+     */
+    public static Drink parseDrink(String drinkName) throws ParseException {
+        requireNonNull(drinkName);
+        String trimmedName = drinkName.trim();
+        if (trimmedName.isEmpty()) {
+            throw new ParseException("Drink name cannot be empty.");
+        }
+
+        try {
+            // Directly call findDrinkByName() without orElseThrow()
+            return UniqueDrinkList.findDrinkByName(trimmedName);
+        } catch (DrinkNotFoundException e) {
+            throw new ParseException("Drink not found: " + trimmedName);
+        }
     }
 
     /**

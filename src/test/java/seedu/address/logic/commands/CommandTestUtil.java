@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_DRINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS_WORKED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERFORMANCE_RATING;
@@ -94,8 +94,8 @@ public class CommandTestUtil {
     public static final String INVALID_REWARD_POINTS_DESC = " " + PREFIX_REWARD_POINTS + "-100";
     // negative visit count not allowed
     public static final String INVALID_VISIT_COUNT_DESC = " " + PREFIX_VISIT_COUNT + "-1";
-    // empty string not allowed for favourite items
-    public static final String INVALID_FAVOURITE_ITEM_DESC = " " + PREFIX_FAVOURITE_ITEM;
+    // empty string not allowed for favourite drinks
+    public static final String INVALID_FAVOURITE_DRINK_DESC = " " + PREFIX_FAVOURITE_DRINK;
     // negative total spent not allowed
     public static final String INVALID_TOTAL_SPENT_DESC = " " + PREFIX_TOTAL_SPENT + "-50.0";
 
@@ -155,7 +155,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_STUDENT = "student";
     public static final String VALID_REWARD_POINTS_JAMES = "200";
     public static final String VALID_VISIT_COUNT_JAMES = "12";
-    public static final String VALID_FAVOURITE_ITEM_JAMES = "Flat White";
+    public static final String VALID_FAVOURITE_DRINK_JAMES = "Flat White";
     public static final String VALID_TOTAL_SPENT_JAMES = "155.75";
     public static final String VALID_RATING_JAMES = "5";
     public static final String VALID_CUSTOMER_ID_JAMES = "C45678";
@@ -170,7 +170,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_NEW = "new";
     public static final String VALID_REWARD_POINTS_OLIVIA = "75";
     public static final String VALID_VISIT_COUNT_OLIVIA = "3";
-    public static final String VALID_FAVOURITE_ITEM_OLIVIA = "Green Tea Latte";
+    public static final String VALID_FAVOURITE_DRINK_OLIVIA = "Green Tea Latte";
     public static final String VALID_TOTAL_SPENT_OLIVIA = "42.90";
     public static final String VALID_CUSTOMER_ID_OLIVIA = "C12345";
 
@@ -191,8 +191,8 @@ public class CommandTestUtil {
     public static final String REWARD_POINTS_DESC_OLIVIA = " " + PREFIX_REWARD_POINTS + VALID_REWARD_POINTS_OLIVIA;
     public static final String VISIT_COUNT_DESC_JAMES = " " + PREFIX_VISIT_COUNT + VALID_VISIT_COUNT_JAMES;
     public static final String VISIT_COUNT_DESC_OLIVIA = " " + PREFIX_VISIT_COUNT + VALID_VISIT_COUNT_OLIVIA;
-    public static final String FAVOURITE_ITEM_DESC_JAMES = " " + PREFIX_FAVOURITE_ITEM + VALID_FAVOURITE_ITEM_JAMES;
-    public static final String FAVOURITE_ITEM_DESC_OLIVIA = " " + PREFIX_FAVOURITE_ITEM + VALID_FAVOURITE_ITEM_OLIVIA;
+    public static final String FAVOURITE_DRINK_DESC_JAMES = " " + PREFIX_FAVOURITE_DRINK + VALID_FAVOURITE_DRINK_JAMES;
+    public static final String FAVOURITE_DRINK_DESC_OLIVIA = " " + PREFIX_FAVOURITE_DRINK + VALID_FAVOURITE_DRINK_OLIVIA;
     public static final String TOTAL_SPENT_DESC_JAMES = " " + PREFIX_TOTAL_SPENT + VALID_TOTAL_SPENT_JAMES;
     public static final String TOTAL_SPENT_DESC_OLIVIA = " " + PREFIX_TOTAL_SPENT + VALID_TOTAL_SPENT_OLIVIA;
 
@@ -246,12 +246,12 @@ public class CommandTestUtil {
             .withPhone(VALID_PHONE_JAMES).withEmail(VALID_EMAIL_JAMES).withAddress(VALID_ADDRESS_JAMES)
             .withTags(VALID_TAG_STUDENT).withCustomerId(VALID_CUSTOMER_ID_JAMES)
             .withRewardPoints(VALID_REWARD_POINTS_JAMES).withVisitCount(VALID_VISIT_COUNT_JAMES)
-            .withFavouriteItem(VALID_FAVOURITE_ITEM_JAMES).withTotalSpent(VALID_TOTAL_SPENT_JAMES).build();
+            .withFavouriteDrink(VALID_FAVOURITE_DRINK_JAMES).withTotalSpent(VALID_TOTAL_SPENT_JAMES).build();
         DESC_OLIVIA = new EditCustomerDescriptorBuilder().withName(VALID_NAME_OLIVIA)
             .withPhone(VALID_PHONE_OLIVIA).withEmail(VALID_EMAIL_OLIVIA).withAddress(VALID_ADDRESS_OLIVIA)
             .withTags(VALID_TAG_NEW).withCustomerId(VALID_CUSTOMER_ID_OLIVIA)
             .withRewardPoints(VALID_REWARD_POINTS_OLIVIA).withVisitCount(VALID_VISIT_COUNT_OLIVIA)
-            .withFavouriteItem(VALID_FAVOURITE_ITEM_OLIVIA).withTotalSpent(VALID_TOTAL_SPENT_OLIVIA).build();
+            .withFavouriteDrink(VALID_FAVOURITE_DRINK_OLIVIA).withTotalSpent(VALID_TOTAL_SPENT_OLIVIA).build();
     }
 
     /**

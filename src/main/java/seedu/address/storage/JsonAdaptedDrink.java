@@ -4,25 +4,28 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.drink.Category;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.DrinkName;
+import seedu.address.model.drink.Price;
 
 /**
  * Jackson-friendly version of {@link Drink}.
  */
 public class JsonAdaptedDrink {
 
-    private final String name;
-    private final double price;
-    private final String category;
+    private final DrinkName drinkName;
+    private final Price price;
+    private final Category category;
 
     /**
      * Constructs a {@code JsonAdaptedDrink} with the given drink details.
      */
     @JsonCreator
-    public JsonAdaptedDrink(@JsonProperty("name") String name,
-                           @JsonProperty("price") double price,
-                           @JsonProperty("category") String category) {
-        this.name = name;
+    public JsonAdaptedDrink(@JsonProperty("drinkName") DrinkName drinkName,
+                           @JsonProperty("price") Price price,
+                           @JsonProperty("category") Category category) {
+        this.drinkName = drinkName;
         this.price = price;
         this.category = category;
     }
@@ -31,7 +34,7 @@ public class JsonAdaptedDrink {
      * Converts a given {@code Drink} into this class for Jackson use.
      */
     public JsonAdaptedDrink(Drink source) {
-        name = source.getName();
+        drinkName = source.getDrinkName();
         price = source.getPrice();
         category = source.getCategory();
     }
@@ -42,18 +45,18 @@ public class JsonAdaptedDrink {
      * @throws IllegalValueException if there were any data constraints violated in the adapted drink.
      */
     public Drink toModelType() throws IllegalValueException {
-        if (name == null || name.trim().isEmpty()) {
+        if (drinkName == null || drinkName.getDrinkName().trim().isEmpty()) {
             throw new IllegalValueException("Drink name cannot be blank");
         }
 
-        if (price <= 0) {
+        if (price.getPrice() <= 0) {
             throw new IllegalValueException("Drink price must be a positive number");
         }
 
-        if (category == null || category.trim().isEmpty()) {
+        if (category == null || category.getCategory().trim().isEmpty()) {
             throw new IllegalValueException("Drink category cannot be blank");
         }
 
-        return new Drink(name, price, category);
+        return new Drink(drinkName, price, category);
     }
 }

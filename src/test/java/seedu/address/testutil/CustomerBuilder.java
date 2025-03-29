@@ -7,7 +7,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -16,6 +15,7 @@ import seedu.address.model.person.TotalSpent;
 import seedu.address.model.person.VisitCount;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.drink.Drink;
 
 /**
  * A utility class to help with building Customer objects.
@@ -30,7 +30,7 @@ public class CustomerBuilder {
     public static final String DEFAULT_REMARK = "Regular customer";
     public static final String DEFAULT_REWARD_POINTS = "100";
     public static final String DEFAULT_VISIT_COUNT = "5";
-    public static final String DEFAULT_FAVOURITE_ITEM = "Latte";
+    public static final String DEFAULT_FAVOURITE_DRINK = "Latte";
     public static final String DEFAULT_TOTAL_SPENT = "75.50";
     public static final String DEFAULT_RATING = "5";
 
@@ -42,7 +42,7 @@ public class CustomerBuilder {
     private Set<Tag> tags;
     private RewardPoints rewardPoints;
     private VisitCount visitCount;
-    private FavouriteItem favouriteItem;
+    private Drink favouriteDrink;
     private TotalSpent totalSpent;
     private CustomerId customerId;
 
@@ -59,7 +59,7 @@ public class CustomerBuilder {
         tags = new HashSet<>();
         rewardPoints = new RewardPoints(DEFAULT_REWARD_POINTS);
         visitCount = new VisitCount(DEFAULT_VISIT_COUNT);
-        favouriteItem = new FavouriteItem(DEFAULT_FAVOURITE_ITEM);
+        favouriteDrink = new Drink(DEFAULT_FAVOURITE_DRINK);
         totalSpent = new TotalSpent(DEFAULT_TOTAL_SPENT);
     }
 
@@ -76,7 +76,7 @@ public class CustomerBuilder {
         tags = new HashSet<>(customerToCopy.getTags());
         rewardPoints = customerToCopy.getRewardPoints();
         visitCount = customerToCopy.getVisitCount();
-        favouriteItem = customerToCopy.getFavouriteItem();
+        favouriteDrink = customerToCopy.getFavouriteDrink();
         totalSpent = customerToCopy.getTotalSpent();
     }
 
@@ -145,10 +145,10 @@ public class CustomerBuilder {
     }
 
     /**
-     * Sets the {@code favouriteItem} of the {@code Customer} that we are building.
+     * Sets the {@code favouriteDrink} of the {@code Customer} that we are building.
      */
-    public CustomerBuilder withFavouriteItem(String favouriteItem) {
-        this.favouriteItem = new FavouriteItem(favouriteItem);
+    public CustomerBuilder withFavouriteDrink(String favouriteDrink) {
+        this.favouriteDrink = new Drink(favouriteDrink);
         return this;
     }
 
@@ -173,6 +173,6 @@ public class CustomerBuilder {
      */
     public Customer build() {
         return new Customer(name, phone, email, address, remark, tags,
-                customerId, rewardPoints, visitCount, favouriteItem, totalSpent);
+                customerId, rewardPoints, visitCount, favouriteDrink, totalSpent);
     }
 }

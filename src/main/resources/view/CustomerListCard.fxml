@@ -21,6 +21,7 @@
 
         <!-- Additional details -->
         <HBox spacing="10">
+            <Label fx:id="favouriteDrink" styleClass="cell-details" text="Favourite Drink: Latte" />
             <Label fx:id="visitCount" styleClass="cell-details" text="Visits: 10" />
             <Label fx:id="totalSpent" styleClass="cell-details" text="Total: $100.00" />
         </HBox>

@@ -7,12 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_JAME
 import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_OLIVIA;
-import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_ITEM_DESC_JAMES;
-import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_ITEM_DESC_OLIVIA;
+import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_DRINK_DESC_JAMES;
+import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_DRINK_DESC_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CUSTOMER_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVOURITE_ITEM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVOURITE_DRINK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_REWARD_POINTS_DESC;
@@ -35,8 +35,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_ID_JAM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_ID_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_OLIVIA;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_ITEM_JAMES;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_ITEM_OLIVIA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_DRINK_JAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_DRINK_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_JAMES;
@@ -62,10 +62,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCustomerCommand;
 import seedu.address.logic.parser.descriptors.EditCustomerDescriptor;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RewardPoints;
@@ -128,8 +128,8 @@ public class EditCustomerCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_REWARD_POINTS_DESC, RewardPoints.MESSAGE_CONSTRAINTS);
         // invalid visit count
         assertParseFailure(parser, "1" + INVALID_VISIT_COUNT_DESC, VisitCount.MESSAGE_CONSTRAINTS);
-        // invalid favourite item
-        assertParseFailure(parser, "1" + INVALID_FAVOURITE_ITEM_DESC, FavouriteItem.MESSAGE_CONSTRAINTS);
+        // invalid favourite drink
+        assertParseFailure(parser, "1" + INVALID_FAVOURITE_DRINK_DESC, Drink.MESSAGE_CONSTRAINTS);
         // invalid total spent
         assertParseFailure(parser, "1" + INVALID_TOTAL_SPENT_DESC, TotalSpent.MESSAGE_CONSTRAINTS);
 
@@ -157,13 +157,13 @@ public class EditCustomerCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + CUSTOMER_ID_DESC_OLIVIA + NAME_DESC_OLIVIA + PHONE_DESC_OLIVIA
             + EMAIL_DESC_OLIVIA + ADDRESS_DESC_OLIVIA + TAG_DESC_STUDENT + TAG_DESC_NEW + REWARD_POINTS_DESC_OLIVIA
-            + VISIT_COUNT_DESC_OLIVIA + FAVOURITE_ITEM_DESC_OLIVIA + TOTAL_SPENT_DESC_OLIVIA;
+            + VISIT_COUNT_DESC_OLIVIA + FAVOURITE_DRINK_DESC_OLIVIA + TOTAL_SPENT_DESC_OLIVIA;
 
         EditCustomerDescriptor descriptor = new EditCustomerDescriptorBuilder().withCustomerId(VALID_CUSTOMER_ID_OLIVIA)
             .withName(VALID_NAME_OLIVIA).withPhone(VALID_PHONE_OLIVIA).withEmail(VALID_EMAIL_OLIVIA)
             .withAddress(VALID_ADDRESS_OLIVIA).withTags(VALID_TAG_NEW, VALID_TAG_STUDENT)
             .withRewardPoints(VALID_REWARD_POINTS_OLIVIA).withVisitCount(VALID_VISIT_COUNT_OLIVIA)
-            .withFavouriteItem(VALID_FAVOURITE_ITEM_OLIVIA).withTotalSpent(VALID_TOTAL_SPENT_OLIVIA).build();
+            .withFavouriteDrink(VALID_FAVOURITE_DRINK_OLIVIA).withTotalSpent(VALID_TOTAL_SPENT_OLIVIA).build();
         EditCustomerCommand expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -233,9 +233,9 @@ public class EditCustomerCommandParserTest {
         expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // favourite item
-        userInput = targetIndex.getOneBased() + FAVOURITE_ITEM_DESC_JAMES;
-        descriptor = new EditCustomerDescriptorBuilder().withFavouriteItem(VALID_FAVOURITE_ITEM_JAMES).build();
+        // favourite drink
+        userInput = targetIndex.getOneBased() + FAVOURITE_DRINK_DESC_JAMES;
+        descriptor = new EditCustomerDescriptorBuilder().withFavouriteDrink(VALID_FAVOURITE_DRINK_JAMES).build();
         expectedCommand = new EditCustomerCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

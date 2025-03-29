@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_DRINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REWARD_POINTS;
@@ -39,7 +39,7 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_TAG, PREFIX_CUSTOMER_ID,
-                PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_ITEM,
+                PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_DRINK,
                 PREFIX_TOTAL_SPENT);
 
         Index index;
@@ -52,7 +52,7 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-            PREFIX_CUSTOMER_ID, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_ITEM, PREFIX_TOTAL_SPENT);
+            PREFIX_CUSTOMER_ID, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_DRINK, PREFIX_TOTAL_SPENT);
 
         EditCustomerDescriptor editCustomerDescriptor = new EditCustomerDescriptor();
 
@@ -83,9 +83,9 @@ public class EditCustomerCommandParser implements Parser<EditCustomerCommand> {
                 ParserUtil.parseVisitCount(argMultimap.getValue(PREFIX_VISIT_COUNT).get())
             );
         }
-        if (argMultimap.getValue(PREFIX_FAVOURITE_ITEM).isPresent()) {
-            editCustomerDescriptor.setFavouriteItem(
-                ParserUtil.parseFavouriteItem(argMultimap.getValue(PREFIX_FAVOURITE_ITEM).get())
+        if (argMultimap.getValue(PREFIX_FAVOURITE_DRINK).isPresent()) {
+            editCustomerDescriptor.setFavouriteDrink(
+                ParserUtil.parseFavouriteDrink(argMultimap.getValue(PREFIX_FAVOURITE_DRINK).get())
             );
         }
         if (argMultimap.getValue(PREFIX_TOTAL_SPENT).isPresent()) {

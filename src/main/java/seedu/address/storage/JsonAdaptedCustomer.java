@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -41,7 +41,7 @@ class JsonAdaptedCustomer {
     private final String customerId;
     private final String rewardPoints;
     private final String visitCount;
-    private final String favouriteItem;
+    private final String favouriteDrink;
     private final String totalSpent;
 
     /**
@@ -57,7 +57,7 @@ class JsonAdaptedCustomer {
                                @JsonProperty("customerId") String customerId,
                                @JsonProperty("rewardPoints") String rewardPoints,
                                @JsonProperty("visitCount") String visitCount,
-                               @JsonProperty("favouriteItem") String favouriteItem,
+                               @JsonProperty("favouriteDrink") String favouriteDrink,
                                @JsonProperty("totalSpent") String totalSpent) {
         this.name = name;
         this.phone = phone;
@@ -70,7 +70,7 @@ class JsonAdaptedCustomer {
         this.customerId = customerId;
         this.rewardPoints = rewardPoints;
         this.visitCount = visitCount;
-        this.favouriteItem = favouriteItem;
+        this.favouriteDrink = favouriteDrink;
         this.totalSpent = totalSpent;
     }
 
@@ -89,7 +89,7 @@ class JsonAdaptedCustomer {
         customerId = source.getCustomerId().value;
         rewardPoints = source.getRewardPoints().value;
         visitCount = source.getVisitCount().value;
-        favouriteItem = source.getFavouriteItem().value;
+        favouriteDrink = source.getFavouriteDrink().value;
         totalSpent = source.getTotalSpent().value;
     }
 
@@ -165,13 +165,13 @@ class JsonAdaptedCustomer {
         }
         final VisitCount modelVisitCount = new VisitCount(visitCount);
 
-        if (favouriteItem == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Favourite Item"));
+        if (favouriteDrink == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Favourite Drink"));
         }
-        if (!FavouriteItem.isValidFavouriteItem(favouriteItem)) {
-            throw new IllegalValueException(FavouriteItem.MESSAGE_CONSTRAINTS);
+        if (!Drink.isValidDrink(favouriteDrink)) {
+            throw new IllegalValueException(Drink.MESSAGE_CONSTRAINTS);
         }
-        final FavouriteItem modelFavouriteItem = new FavouriteItem(favouriteItem);
+        final Drink modelFavouriteDrink = new Drink(favouriteDrink);
 
         if (totalSpent == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Total Spent"));
@@ -183,7 +183,7 @@ class JsonAdaptedCustomer {
 
         final Set<Tag> modelTags = new HashSet<>(customerTags);
         return new Customer(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
-                modelCustomerId, modelRewardPoints, modelVisitCount, modelFavouriteItem, modelTotalSpent);
+                modelCustomerId, modelRewardPoints, modelVisitCount, modelFavouriteDrink, modelTotalSpent);
     }
 
 }

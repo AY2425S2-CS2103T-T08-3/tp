@@ -53,7 +53,7 @@ public class CustomerDetailPanel extends UiPart<Region> {
     @FXML
     private Label rewardPoints;
     @FXML
-    private Label favouriteItem;
+    private Label favouriteDrink;
     @FXML
     private Label remark;
     @FXML
@@ -167,9 +167,9 @@ public class CustomerDetailPanel extends UiPart<Region> {
             }
 
             try {
-                safeSetText(favouriteItem, customer.getFavouriteItem().toString());
+                safeSetText(favouriteDrink, customer.getFavouriteDrink().toString());
             } catch (Exception e) {
-                safeSetText(favouriteItem, "None");
+                safeSetText(favouriteDrink, "None");
             }
 
             try {

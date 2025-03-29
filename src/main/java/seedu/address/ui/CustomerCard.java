@@ -41,6 +41,8 @@ public class CustomerCard extends UiPart<Region> {
     @FXML
     private Label totalSpent;
     @FXML
+    private Label favouriteDrink;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -56,7 +58,7 @@ public class CustomerCard extends UiPart<Region> {
         email.setText("Email: " + customer.getEmail().value);
         visitCount.setText("Visits: " + customer.getVisitCount());
         totalSpent.setText("Total: $" + String.format("%.2f", Double.parseDouble(customer.getTotalSpent().value)));
-
+        favouriteDrink.setText("Favourite Drink: " + customer.getFavouriteDrink().value);
 
         // Set tags
         customer.getTags().forEach(tag -> {

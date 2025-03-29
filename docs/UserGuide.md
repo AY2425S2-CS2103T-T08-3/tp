@@ -147,9 +147,9 @@ Format: `help`
 
 ## Adding a customer: `customeradd` or `c`
 
-Adds a customer to the customer list with required details such as customer ID, name, phone, email, address, reward points, visit count, favourite item, and total spent.
+Adds a customer to the customer list with required details such as customer ID, name, phone, email, address, reward points, visit count, favourite drink, and total spent.
 
-Format: `customeradd cid/CUSTOMER_ID n/NAME p/PHONE e/EMAIL a/ADDRESS rp/REWARD_POINTS vc/VISIT_COUNT fi/FAVOURITE_ITEM ts/TOTAL_SPENT [t/TAG]…`
+Format: `customeradd cid/CUSTOMER_ID n/NAME p/PHONE e/EMAIL a/ADDRESS rp/REWARD_POINTS vc/VISIT_COUNT fi/FAVOURITE_DRINK ts/TOTAL_SPENT [t/TAG]…`
 
 * `CUSTOMER_ID` should start with a 'C' followed by digits, e.g., C1001
 * `NAME` should only contain alphanumeric characters and spaces, and it should not be blank
@@ -158,7 +158,7 @@ Format: `customeradd cid/CUSTOMER_ID n/NAME p/PHONE e/EMAIL a/ADDRESS rp/REWARD_
 * `ADDRESS` can take any value, and it should not be blank
 * `REWARD_POINTS` should only contain digits
 * `VISIT_COUNT` should only contain digits
-* `FAVOURITE_ITEM` can take any value, and it should not be blank
+* `FAVOURITE_DRINK` can take any value, and it should not be blank
 * `TOTAL_SPENT` should only contain digits, representing the amount in dollars
 
 Examples:
@@ -580,7 +580,7 @@ Ans: No, the visit count is automatically incremented each time you record a pur
 
 Action | Format, Examples
 -------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Customer** | `customeradd cid/CUSTOMER_ID n/NAME p/PHONE e/EMAIL a/ADDRESS rp/REWARD_POINTS vc/VISIT_COUNT fi/FAVOURITE_ITEM ts/TOTAL_SPENT [t/TAG]…` <br> e.g., `customeradd cid/C001 n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rp/150 vc/8 fi/Cappuccino ts/120 t/regular`
+**Add Customer** | `customeradd cid/CUSTOMER_ID n/NAME p/PHONE e/EMAIL a/ADDRESS rp/REWARD_POINTS vc/VISIT_COUNT fi/FAVORITE_ITEM ts/TOTAL_SPENT [t/TAG]…` <br> e.g., `customeradd cid/C001 n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 rp/150 vc/8 fi/Cappuccino ts/120 t/regular`
 **Add Customer (Shortcut)** | `c <CUSTOMER_ID>:<NAME>:<PHONE>` <br> e.g., `c C0102:Charlie:97285712`
 **Delete Customer** | `customerdelete INDEX` <br> e.g., `customerdelete 2`
 **Edit Customer** | details to be added soon...

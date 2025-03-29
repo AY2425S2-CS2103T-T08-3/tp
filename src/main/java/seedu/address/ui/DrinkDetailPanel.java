@@ -107,7 +107,7 @@ public class DrinkDetailPanel extends UiPart<Region> {
             return;
         }
 
-        logger.fine("Updating drink details for: " + drink.getName());
+        logger.fine("Updating drink details for: " + drink.getDrinkName().getDrinkName());
 
         try {
             // Show details and hide the no selection message
@@ -121,12 +121,12 @@ public class DrinkDetailPanel extends UiPart<Region> {
 
             // Set the header (this is the most crucial part)
             if (drinkNameHeader != null) {
-                drinkNameHeader.setText(drink.getName());
+                drinkNameHeader.setText(drink.getDrinkName().getDrinkName());
             }
 
             // Update all fields with null safety
             safeSetText(price, String.format("$%.2f", drink.getPrice()));
-            safeSetText(category, drink.getCategory());
+            safeSetText(category, drink.getCategory().getCategory());
 
             // For fields that might not exist in your model yet
             safeSetText(description, "");

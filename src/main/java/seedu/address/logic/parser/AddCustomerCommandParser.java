@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_DRINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REWARD_POINTS;
@@ -17,11 +17,11 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -40,7 +40,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
     private static final String DEFAULT_VISIT_COUNT = "1";
     private static final String DEFAULT_TOTAL_SPENT = "10";
     private static final String DEFAULT_REWARD_POINTS = "0";
-    private static final String DEFAULT_FAVOURITE_ITEM = "unknown";
+    private static final String DEFAULT_FAVOURITE_DRINK = "unknown";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCustomerCommand
@@ -70,27 +70,27 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
 
             RewardPoints rewardPoints = new RewardPoints(DEFAULT_REWARD_POINTS);
             VisitCount visitCount = new VisitCount(DEFAULT_VISIT_COUNT);
-            FavouriteItem favouriteItem = new FavouriteItem(DEFAULT_FAVOURITE_ITEM);
+            Drink favouriteDrink = new Drink(DEFAULT_FAVOURITE_DRINK);
             TotalSpent totalSpent = new TotalSpent(DEFAULT_TOTAL_SPENT);
 
             Customer customer = new Customer(name, phone, email, address, remark, tagList,
-                    customerId, rewardPoints, visitCount, favouriteItem, totalSpent);
+                    customerId, rewardPoints, visitCount, favouriteDrink, totalSpent);
 
             return new AddCustomerCommand(customer);
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_CUSTOMER_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_ITEM, PREFIX_TOTAL_SPENT);
+                PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_DRINK, PREFIX_TOTAL_SPENT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CUSTOMER_ID, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
-            PREFIX_EMAIL, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_ITEM, PREFIX_TOTAL_SPENT)
+            PREFIX_EMAIL, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_DRINK, PREFIX_TOTAL_SPENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_CUSTOMER_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-            PREFIX_ADDRESS, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_ITEM, PREFIX_TOTAL_SPENT);
+            PREFIX_ADDRESS, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_DRINK, PREFIX_TOTAL_SPENT);
 
         CustomerId customerId = new CustomerId(argMultimap.getValue(PREFIX_CUSTOMER_ID).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -103,11 +103,11 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         // Wrap the parsed primitives into their domain-specific types
         RewardPoints rewardPoints = new RewardPoints(argMultimap.getValue(PREFIX_REWARD_POINTS).get());
         VisitCount visitCount = new VisitCount(argMultimap.getValue(PREFIX_VISIT_COUNT).get());
-        FavouriteItem favouriteItem = new FavouriteItem(argMultimap.getValue(PREFIX_FAVOURITE_ITEM).get());
+        Drink favouriteDrink = new Drink(argMultimap.getValue(PREFIX_FAVOURITE_DRINK).get());
         TotalSpent totalSpent = new TotalSpent(argMultimap.getValue(PREFIX_TOTAL_SPENT).get());
 
         Customer customer = new Customer(name, phone, email, address, remark, tagList,
-                customerId, rewardPoints, visitCount, favouriteItem, totalSpent);
+                customerId, rewardPoints, visitCount, favouriteDrink, totalSpent);
 
         return new AddCustomerCommand(customer);
     }

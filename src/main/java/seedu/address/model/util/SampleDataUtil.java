@@ -7,13 +7,15 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.DrinkCatalog;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.drink.Category;
 import seedu.address.model.drink.Drink;
+import seedu.address.model.drink.DrinkName;
+import seedu.address.model.drink.Price;
 import seedu.address.model.drink.ReadOnlyDrinkCatalog;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.HoursWorked;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PerformanceRating;
@@ -119,7 +121,7 @@ public class SampleDataUtil {
                     new CustomerId("C001"),
                     new RewardPoints("100"),
                     new VisitCount("12"),
-                    new FavouriteItem("oat latte with vanilla syrup"),
+                    new Drink("latte"),
                     new TotalSpent("120.3")
             ),
             new Customer(
@@ -132,7 +134,7 @@ public class SampleDataUtil {
                     new CustomerId("C002"),
                     new RewardPoints("100"),
                     new VisitCount("12"),
-                    new FavouriteItem("dog latte"),
+                    new Drink("latte"),
                     new TotalSpent("120.3")
             ),
             new Customer(
@@ -145,7 +147,7 @@ public class SampleDataUtil {
                     new CustomerId("C003"),
                     new RewardPoints("0"),
                     new VisitCount("78"),
-                    new FavouriteItem("water"),
+                    new Drink("latte"),
                     new TotalSpent("50.0")
             )
         };
@@ -167,17 +169,20 @@ public class SampleDataUtil {
      */
     public static Drink[] getSampleDrinks() {
         return new Drink[] {
-            new Drink("Espresso", 3.50, "Coffee"),
-            new Drink("Cappuccino", 4.50, "Coffee"),
-            new Drink("Latte", 4.50, "Coffee"),
-            new Drink("Mocha", 5.00, "Coffee"),
-            new Drink("Green Tea", 3.00, "Tea"),
-            new Drink("Black Tea", 3.00, "Tea"),
-            new Drink("Earl Grey", 3.50, "Tea"),
-            new Drink("Chamomile", 3.50, "Tea"),
-            new Drink("Orange Juice", 4.00, "Cold Drinks"),
-            new Drink("Apple Juice", 4.00, "Cold Drinks"),
-            new Drink("Iced Coffee", 4.50, "Cold Drinks"),
+            new Drink(new DrinkName("Espresso"), new Price(3.50), new Category("Coffee")),
+            new Drink(new DrinkName("Cappuccino"), new Price(4.50), new Category("Coffee")),
+            new Drink(new DrinkName("Latte"), new Price(4.50), new Category("Coffee")),
+            new Drink(new DrinkName("Mocha"), new Price(5.00), new Category("Coffee")),
+            new Drink(new DrinkName("Green Tea"), new Price(3.00), new Category("Tea")),
+            new Drink(new DrinkName("Black Tea"), new Price(3.00), new Category("Tea")),
+            new Drink(new DrinkName("Earl Grey"), new Price(3.50), new Category("Tea")),
+            new Drink(new DrinkName("Chamomile"), new Price(3.50), new Category("Tea")),
+            new Drink(new DrinkName("Orange Juice"), new Price(4.00), new Category("Cold Drinks")),
+            new Drink(new DrinkName("Apple Juice"), new Price(4.00), new Category("Cold Drinks")),
+            new Drink(new DrinkName("Iced Coffee"), new Price(4.50), new Category("Cold Drinks")),
+            new Drink(new DrinkName("Chocolate Chip Cookie"), new Price(2.50), new Category("Pastries")),
+            new Drink(new DrinkName("Croissant"), new Price(3.00), new Category("Pastries")),
+            new Drink(new DrinkName("Blueberry Muffin"), new Price(3.50), new Category("Pastries"))
         };
     }
 

@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.descriptors.EditCustomerDescriptor;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RewardPoints;
@@ -45,7 +45,7 @@ public class EditCustomerDescriptorBuilder {
         descriptor.setCustomerId(customer.getCustomerId());
         descriptor.setRewardPoints(customer.getRewardPoints());
         descriptor.setVisitCount(customer.getVisitCount());
-        descriptor.setFavouriteItem(customer.getFavouriteItem());
+        descriptor.setFavouriteDrink(customer.getFavouriteDrink());
         descriptor.setTotalSpent(customer.getTotalSpent());
     }
 
@@ -106,10 +106,10 @@ public class EditCustomerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code FavouriteItem} of the {@code EditCustomerDescriptor} that we are building.
+     * Sets the {@code FavouriteDrink} of the {@code EditCustomerDescriptor} that we are building.
      */
-    public EditCustomerDescriptorBuilder withFavouriteItem(String favouriteItem) {
-        descriptor.setFavouriteItem(new FavouriteItem(favouriteItem));
+    public EditCustomerDescriptorBuilder withFavouriteDrink(String favouriteDrink) {
+        descriptor.setFavouriteDrink(new Drink(favouriteDrink));
         return this;
     }
 

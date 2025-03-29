@@ -20,7 +20,7 @@ public class TypicalCustomers {
         .withRemark("Prefers decaf")
         .withRewardPoints("200")
         .withVisitCount("12")
-        .withFavouriteItem("Flat White")
+        .withFavouriteDrink("Flat White")
         .withTotalSpent("155.75")
         .withTags("regular", "student").build();
 
@@ -32,7 +32,7 @@ public class TypicalCustomers {
             .withRemark("Birthday in March")
             .withRewardPoints("75")
             .withVisitCount("3")
-            .withFavouriteItem("Green Tea Latte")
+            .withFavouriteDrink("Green Tea Latte")
             .withTotalSpent("42.90")
             .withTags("new", "student").build();
 

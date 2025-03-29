@@ -38,7 +38,7 @@ Package Model as ModelPackage <<Rectangle>>{
     Class CustomerId
     Class RewardPoints
     Class VisitCount
-    Class FavouriteItem
+    Class FavouriteDrink
     Class TotalSpent
 
     Class Drink
@@ -96,7 +96,7 @@ Staff *--> PerformanceRating
 Customer *--> CustomerId
 Customer *--> RewardPoints
 Customer *--> VisitCount
-Customer *--> FavouriteItem
+Customer *--> FavouriteDrink
 Customer *--> TotalSpent
 
 Drink *--> DrinkName

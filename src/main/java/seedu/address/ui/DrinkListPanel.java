@@ -36,7 +36,7 @@ public class DrinkListPanel extends UiPart<Region> {
         // Add listener for drink selection
         drinkListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null && selectionHandler != null) {
-                logger.fine("Selection changed to: " + newValue.getName());
+                logger.fine("Selection changed to: " + newValue.getDrinkName());
                 selectionHandler.accept(newValue);
             }
         });

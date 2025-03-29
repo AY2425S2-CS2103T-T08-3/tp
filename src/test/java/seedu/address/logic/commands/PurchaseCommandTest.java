@@ -25,7 +25,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -64,7 +63,7 @@ public class PurchaseCommandTest {
             new CustomerId("C001"),
             new RewardPoints("500"), // Enough points for redemption
             new VisitCount("5"),
-            new FavouriteItem("Coffee"),
+            new Drink("latte"),
             new TotalSpent("50.0")
         );
         addressBook.addCustomer(testCustomer);
@@ -142,7 +141,7 @@ public class PurchaseCommandTest {
             new CustomerId("C002"),
             new RewardPoints("10"), // Not enough points
             new VisitCount("1"),
-            new FavouriteItem("Water"),
+            new Drink("latte"),
             new TotalSpent("5.0")
         );
 

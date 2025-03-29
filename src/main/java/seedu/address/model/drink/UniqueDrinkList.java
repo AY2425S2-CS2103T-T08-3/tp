@@ -25,9 +25,22 @@ import seedu.address.model.drink.exceptions.DuplicateDrinkException;
  */
 public class UniqueDrinkList implements Iterable<Drink> {
 
-    private final ObservableList<Drink> internalList = FXCollections.observableArrayList();
+    private static final ObservableList<Drink> internalList = FXCollections.observableArrayList();
     private final ObservableList<Drink> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+
+    /**
+     * Loads the provided list of drinks into the internal list.
+     * This method ensures that the internal list is populated only if it is currently empty.
+     *
+     * @param drinks The list of drinks to be loaded into the internal list.
+     *               Must not be null and must not contain duplicate drinks.
+     */
+    public static void loadDrinks(List<Drink> drinks) {
+        if (internalList.isEmpty()) {
+            internalList.addAll(drinks);
+        }
+    }
 
     /**
      * Returns true if the list contains an equivalent drink as the given argument.
@@ -105,6 +118,19 @@ public class UniqueDrinkList implements Iterable<Drink> {
      */
     public ObservableList<Drink> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Finds and returns a drink object with the given name.
+     * If not found, throws DrinkNotFoundException.
+     */
+    public static Drink findDrinkByName(String drinkName) {
+        requireNonNull(drinkName);
+
+        return internalList.stream()
+                .filter(drink -> drink.getDrinkName().toString().equalsIgnoreCase(drinkName))
+                .findFirst()
+                .orElseThrow(() -> new DrinkNotFoundException());
     }
 
     @Override

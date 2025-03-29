@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,7 +19,7 @@ public class Customer extends Person {
     private final CustomerId customerId; // Customer id
     private final RewardPoints rewardPoints; // Current reward points balance
     private final VisitCount visitCount; // Number of times customer has visited
-    private final FavouriteItem favouriteItem; // Customer's most ordered item
+    private final Drink favouriteDrink; // Customer's most ordered drink
     private final TotalSpent totalSpent; // Total amount spent by customer
 
     /**
@@ -26,14 +27,14 @@ public class Customer extends Person {
      */
     public Customer(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags,
                     CustomerId customerId, RewardPoints rewardPoints, VisitCount visitCount,
-                    FavouriteItem favouriteItem, TotalSpent totalSpent) {
+                    Drink favouriteDrink, TotalSpent totalSpent) {
         super(name, phone, email, address, remark, tags);
-        requireAllNonNull(customerId, rewardPoints, visitCount, favouriteItem, totalSpent);
+        requireAllNonNull(customerId, rewardPoints, visitCount, favouriteDrink, totalSpent);
 
         this.customerId = customerId;
         this.rewardPoints = rewardPoints;
         this.visitCount = visitCount;
-        this.favouriteItem = favouriteItem;
+        this.favouriteDrink = favouriteDrink;
         this.totalSpent = totalSpent;
     }
 
@@ -49,8 +50,8 @@ public class Customer extends Person {
         return visitCount;
     }
 
-    public FavouriteItem getFavouriteItem() {
-        return favouriteItem;
+    public Drink getFavouriteDrink() {
+        return favouriteDrink;
     }
 
     public TotalSpent getTotalSpent() {
@@ -96,14 +97,14 @@ public class Customer extends Person {
         return super.equals(otherCustomer) // Calls the equality check from Person
                 && rewardPoints.equals(otherCustomer.rewardPoints)
                 && visitCount.equals(otherCustomer.visitCount)
-                && favouriteItem.equals(otherCustomer.favouriteItem)
+                && favouriteDrink.equals(otherCustomer.favouriteDrink)
                 && totalSpent.equals(otherCustomer.totalSpent)
                 && customerId.equals(otherCustomer.customerId);
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode() + Objects.hash(customerId, rewardPoints, visitCount, favouriteItem, totalSpent);
+        return super.hashCode() + Objects.hash(customerId, rewardPoints, visitCount, favouriteDrink, totalSpent);
     }
 
     @Override
@@ -117,7 +118,7 @@ public class Customer extends Person {
                 .add("tags", getTags())
                 .add("rewardPoints", rewardPoints)
                 .add("visitCount", visitCount)
-                .add("favouriteItem", favouriteItem)
+                .add("favouriteDrink", favouriteDrink)
                 .add("totalSpent", totalSpent)
                 .toString();
     }

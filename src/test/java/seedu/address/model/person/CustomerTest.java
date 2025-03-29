@@ -77,8 +77,8 @@ public class CustomerTest {
         editedJames = new CustomerBuilder(JAMES).withVisitCount("20").build();
         assertFalse(JAMES.equals(editedJames));
 
-        // different favourite item -> returns false
-        editedJames = new CustomerBuilder(JAMES).withFavouriteItem("Espresso").build();
+        // different favourite Drink -> returns false
+        editedJames = new CustomerBuilder(JAMES).withFavouriteDrink("Espresso").build();
         assertFalse(JAMES.equals(editedJames));
 
         // different total spent -> returns false
@@ -95,7 +95,7 @@ public class CustomerTest {
                 + "phone=" + JAMES.getPhone() + ", email=" + JAMES.getEmail()
                 + ", address=" + JAMES.getAddress() + ", tags=" + JAMES.getTags()
                 + ", rewardPoints=" + JAMES.getRewardPoints() + ", visitCount=" + JAMES.getVisitCount()
-                + ", favouriteItem=" + JAMES.getFavouriteItem() + ", totalSpent=" + JAMES.getTotalSpent()
+                + ", favouriteDrink=" + JAMES.getFavouriteDrink() + ", totalSpent=" + JAMES.getTotalSpent()
                 + "}";
         assertEquals(expected, JAMES.toString());
     }

@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_JAME
 import static seedu.address.logic.commands.CommandTestUtil.CUSTOMER_ID_DESC_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_OLIVIA;
-import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_ITEM_DESC_JAMES;
-import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_ITEM_DESC_OLIVIA;
+import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_DRINK_DESC_JAMES;
+import static seedu.address.logic.commands.CommandTestUtil.FAVOURITE_DRINK_DESC_OLIVIA;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -27,7 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TOTAL_SPENT_DESC_OLIV
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CUSTOMER_ID_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_JAMES;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_ITEM_JAMES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVOURITE_DRINK_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REWARD_POINTS_JAMES;
@@ -39,7 +39,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VISIT_COUNT_DESC_OLIV
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FAVOURITE_DRINK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REWARD_POINTS;
@@ -54,11 +54,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCustomerCommand;
+import seedu.address.model.drink.Drink;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Customer;
 import seedu.address.model.person.CustomerId;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FavouriteItem;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -73,7 +73,7 @@ public class AddCustomerCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         String userInput = NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
-                + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES + FAVOURITE_ITEM_DESC_JAMES
+                + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES + FAVOURITE_DRINK_DESC_JAMES
                 + TOTAL_SPENT_DESC_JAMES + TAG_DESC_STUDENT;
 
         AddCustomerCommand expectedCommand = new AddCustomerCommand(
@@ -86,7 +86,7 @@ public class AddCustomerCommandParserTest {
                         new CustomerId(VALID_CUSTOMER_ID_JAMES),
                         new RewardPoints(VALID_REWARD_POINTS_JAMES),
                         new VisitCount(VALID_VISIT_COUNT_JAMES),
-                        new FavouriteItem(VALID_FAVOURITE_ITEM_JAMES),
+                        new Drink(VALID_FAVOURITE_DRINK_JAMES),
                         new TotalSpent(VALID_TOTAL_SPENT_JAMES)));
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -96,7 +96,7 @@ public class AddCustomerCommandParserTest {
     public void parse_repeatedNonTagValue_failure() {
         String validExpectedCustomerString = NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES
                 + ADDRESS_DESC_JAMES + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES + TAG_DESC_STUDENT;
+                + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES + TAG_DESC_STUDENT;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_OLIVIA + validExpectedCustomerString,
@@ -122,9 +122,9 @@ public class AddCustomerCommandParserTest {
         assertParseFailure(parser, VISIT_COUNT_DESC_OLIVIA + validExpectedCustomerString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_VISIT_COUNT));
 
-        // multiple favourite items
-        assertParseFailure(parser, FAVOURITE_ITEM_DESC_OLIVIA + validExpectedCustomerString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_FAVOURITE_ITEM));
+        // multiple favourite drinks
+        assertParseFailure(parser, FAVOURITE_DRINK_DESC_OLIVIA + validExpectedCustomerString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_FAVOURITE_DRINK));
 
         // multiple total spent values
         assertParseFailure(parser, TOTAL_SPENT_DESC_OLIVIA + validExpectedCustomerString,
@@ -137,10 +137,10 @@ public class AddCustomerCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser, validExpectedCustomerString + PHONE_DESC_OLIVIA + EMAIL_DESC_OLIVIA
                         + NAME_DESC_OLIVIA + ADDRESS_DESC_OLIVIA + CUSTOMER_ID_DESC_OLIVIA + REWARD_POINTS_DESC_OLIVIA
-                        + VISIT_COUNT_DESC_OLIVIA + FAVOURITE_ITEM_DESC_OLIVIA + TOTAL_SPENT_DESC_OLIVIA
+                        + VISIT_COUNT_DESC_OLIVIA + FAVOURITE_DRINK_DESC_OLIVIA + TOTAL_SPENT_DESC_OLIVIA
                         + validExpectedCustomerString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_CUSTOMER_ID,
-                        PREFIX_EMAIL, PREFIX_PHONE, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_ITEM,
+                        PREFIX_EMAIL, PREFIX_PHONE, PREFIX_REWARD_POINTS, PREFIX_VISIT_COUNT, PREFIX_FAVOURITE_DRINK,
                         PREFIX_TOTAL_SPENT));
     }
 
@@ -151,32 +151,32 @@ public class AddCustomerCommandParserTest {
         // missing customer id prefix
         assertParseFailure(parser, NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                         + VALID_ADDRESS_JAMES + REWARD_POINTS_DESC_JAMES + VALID_VISIT_COUNT_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_JAMES + VALID_PHONE_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_JAMES + PHONE_DESC_JAMES + VALID_EMAIL_JAMES + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
 
         // missing reward points prefix
         assertParseFailure(parser, NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + VALID_REWARD_POINTS_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
 
         // missing visit count prefix
         assertParseFailure(parser, NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VALID_VISIT_COUNT_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES, expectedMessage);
     }
 
     @Test
@@ -184,37 +184,37 @@ public class AddCustomerCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
                 Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_JAMES + INVALID_PHONE_DESC + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
                 Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_JAMES + PHONE_DESC_JAMES + INVALID_EMAIL_DESC + ADDRESS_DESC_JAMES
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
                 Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + INVALID_ADDRESS_DESC
                         + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                        + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
+                        + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
                 Address.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES + ADDRESS_DESC_JAMES
                 + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES + INVALID_TAG_DESC,
+                + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES + INVALID_TAG_DESC,
                 Tag.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_JAMES + PHONE_DESC_JAMES + EMAIL_DESC_JAMES
                 + ADDRESS_DESC_JAMES + CUSTOMER_ID_DESC_JAMES + REWARD_POINTS_DESC_JAMES + VISIT_COUNT_DESC_JAMES
-                + FAVOURITE_ITEM_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
+                + FAVOURITE_DRINK_DESC_JAMES + TOTAL_SPENT_DESC_JAMES,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE));
     }
 
@@ -234,7 +234,7 @@ public class AddCustomerCommandParserTest {
                         new CustomerId("C1230"),
                         new RewardPoints("0"),
                         new VisitCount("1"),
-                        new FavouriteItem("unknown"),
+                        new Drink("unknown"),
                         new TotalSpent("10")
                 )
         );
