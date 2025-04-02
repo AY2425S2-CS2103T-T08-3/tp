@@ -49,6 +49,11 @@ deactivate CafeConnectParser
 LogicManager -> DeleteDrinkCommand : execute(m)
 activate DeleteDrinkCommand
 
+DeleteDrinkCommand -> Model : getFilteredDrinkList()
+activate Model
+Model --> DeleteDrinkCommand : drinkList
+deactivate Model
+
 DeleteDrinkCommand -> Model : deleteDrink(drinkToDelete)
 activate Model
 Model --> DeleteDrinkCommand
@@ -67,6 +72,4 @@ deactivate DeleteDrinkCommand
 [<--LogicManager : r
 deactivate LogicManager
 
-'Place the destroy at the very bottom of the diagram
-destroy DeleteDrinkCommand
 @enduml

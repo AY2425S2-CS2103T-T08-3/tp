@@ -39,7 +39,6 @@ deactivate DeleteCustomerCommand
 
 DeleteCustomerCommandParser --> AddressBookParser : d
 deactivate DeleteCustomerCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteCustomerCommandParser -[hidden]-> AddressBookParser
 destroy DeleteCustomerCommandParser
 
