@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":EditStaffCommandParser" as EditStaffCommandParser LOGIC_COLOR
+participant "e:EditStaffCommand" as EditStaffCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("staffedit 1 p/91234567 e/johndoe@example.com")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("staffedit 1 p/91234567 e/johndoe@example.com")
+activate AddressBookParser
+
+create EditStaffCommandParser
+AddressBookParser -> EditStaffCommandParser
+activate EditStaffCommandParser
+
+EditStaffCommandParser --> AddressBookParser
+deactivate EditStaffCommandParser
+
+AddressBookParser -> EditStaffCommandParser : parse("1 p/91234567 e/johndoe@example.com")
+activate EditStaffCommandParser
+
+create EditStaffCommand
+EditStaffCommandParser -> EditStaffCommand
+activate EditStaffCommand
+
+EditStaffCommand --> EditStaffCommandParser
+EditStaffCommandParser --> AddressBookParser : e
+
+deactivate EditStaffCommand
+
+deactivate EditStaffCommandParser
+
+AddressBookParser --> LogicManager : e
+
+deactivate AddressBookParser
+
+LogicManager -> EditStaffCommand : execute(m)
+activate EditStaffCommand
+
+EditStaffCommand -> Model : getFilteredStaffList()
+activate Model
+Model --> EditStaffCommand : staffList
+
+deactivate Model
+
+EditStaffCommand -> EditStaffCommand : createEditedStaff(staffToEdit, descriptor)
+
+EditStaffCommand -> Model : setStaff(staffToEdit, editedStaff)
+activate Model
+Model --> EditStaffCommand
+
+deactivate Model
+
+EditStaffCommand -> Model : updateFilteredStaffList(PREDICATE_SHOW_ALL_STAFFS)
+activate Model
+Model --> EditStaffCommand
+
+deactivate Model
+
+create CommandResult
+EditStaffCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditStaffCommand
+
+deactivate CommandResult
+
+EditStaffCommand --> LogicManager : r
+
+deactivate EditStaffCommand
+
+[<-- LogicManager
+
+deactivate LogicManager
+@enduml
