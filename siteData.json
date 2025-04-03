@@ -38,10 +38,10 @@
     },
     {
       "src": "DeveloperGuide.md",
+      "title": "Developer Guide",
       "headings": {
         "cafeconnect-developer-guide": "CafeConnect Developer Guide",
         "acknowledgements": "Acknowledgements",
-        "cafeconnect-is-based-on-the-addressbook-level3-project-created-by-the-se-edu-initiative-it-incorporates-the-following-third-party-libraries-javafx-jackson-junit5": "CafeConnect is based on the AddressBook-Level3 project created by the SE-EDU initiative\nIt incorporates the following third-party libraries: JavaFX, Jackson, JUnit5.",
         "setting-up-getting-started": "Setting up, getting started",
         "design": "Design",
         "architecture": "Architecture",

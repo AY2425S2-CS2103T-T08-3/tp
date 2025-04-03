@@ -1,0 +1,82 @@
+@startuml PurchaseShortcutSequenceDiagram
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as CafeConnectParser LOGIC_COLOR
+participant ":PurchaseCommandParser" as PurchaseCommandParser LOGIC_COLOR
+participant "p:PurchaseCommand" as PurchaseCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("p 1:Espresso:r")
+activate LogicManager
+
+LogicManager -> CafeConnectParser : parseCommand("p 1:Espresso:r")
+activate CafeConnectParser
+
+create PurchaseCommandParser
+CafeConnectParser -> PurchaseCommandParser
+activate PurchaseCommandParser
+
+PurchaseCommandParser --> CafeConnectParser
+deactivate PurchaseCommandParser
+
+CafeConnectParser -> PurchaseCommandParser : parse("1:Espresso:r")
+activate PurchaseCommandParser
+
+PurchaseCommandParser -> PurchaseCommandParser : trimmedArgs.matches("^[0-9]+:.+(:r)?$")
+PurchaseCommandParser -> PurchaseCommandParser : parts = trimmedArgs.split(":")
+
+create PurchaseCommand
+PurchaseCommandParser -> PurchaseCommand
+activate PurchaseCommand
+
+PurchaseCommand --> PurchaseCommandParser
+deactivate PurchaseCommand
+
+PurchaseCommandParser --> CafeConnectParser : p
+deactivate PurchaseCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PurchaseCommandParser -[hidden]-> CafeConnectParser
+destroy PurchaseCommandParser
+
+CafeConnectParser --> LogicManager : p
+deactivate CafeConnectParser
+
+LogicManager -> PurchaseCommand : execute(m)
+activate PurchaseCommand
+
+PurchaseCommand -> Model : getFilteredCustomerList()
+activate Model
+Model --> PurchaseCommand
+deactivate Model
+
+PurchaseCommand -> Model : drinkExists(drinkName)
+activate Model
+Model --> PurchaseCommand : true
+deactivate Model
+
+PurchaseCommand -> Model : recordPurchase(index, drinkName, isRedemption)
+activate Model
+Model --> PurchaseCommand
+deactivate Model
+
+create CommandResult
+PurchaseCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PurchaseCommand
+deactivate CommandResult
+
+PurchaseCommand --> LogicManager : r
+deactivate PurchaseCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

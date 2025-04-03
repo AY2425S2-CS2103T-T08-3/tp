@@ -1,29 +1,33 @@
 @startuml StorageSequenceDiagram
 !include style.puml
-skinparam arrowThickness 1.1
-skinparam arrowColor STORAGE_COLOR
-skinparam sequenceLifeLineBorderColor STORAGE_COLOR
-skinparam sequenceMessageFontColor BLACK
+skinparam ArrowFontStyle plain
 
-Actor ":User" as User LOGIC_COLOR_T1
-Participant ":LogicManager" as LogicManager LOGIC_COLOR
-Participant ":ModelManager" as ModelManager MODEL_COLOR
-Participant ":StorageManager" as StorageManager STORAGE_COLOR
-Participant ":JsonAddressBookStorage" as JsonAddressBookStorage STORAGE_COLOR
-Participant ":JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
-Participant ":File" as File STORAGE_COLOR
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+end box
 
-User -> LogicManager : execute("customerdelete 1")
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+participant ":JsonAddressBookStorage" as JsonAddressBookStorage STORAGE_COLOR
+participant ":JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
+participant ":File" as File STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("customerdelete 1")
 activate LogicManager
 
-LogicManager -> ModelManager : deleteCustomer(customer)
-activate ModelManager
-note right of ModelManager
+LogicManager -> Model : deleteCustomer(1)
+activate Model
+note right of Model
   Command execution and model
   modification steps (simplified)
 end note
-ModelManager --> LogicManager : CommandResult
-deactivate ModelManager
+Model --> LogicManager
+deactivate Model
 
 LogicManager -> StorageManager : saveAddressBook(addressBook)
 activate StorageManager
@@ -34,6 +38,7 @@ note right of StorageManager
   filePath points to addressbook.json
 end note
 
+create JsonSerializableAddressBook
 JsonAddressBookStorage -> JsonSerializableAddressBook : new JsonSerializableAddressBook(addressBook)
 activate JsonSerializableAddressBook
 
@@ -57,7 +62,6 @@ deactivate JsonAddressBookStorage
 StorageManager --> LogicManager
 deactivate StorageManager
 
-LogicManager --> User : CommandResult
+[<--LogicManager
 deactivate LogicManager
-
 @enduml
