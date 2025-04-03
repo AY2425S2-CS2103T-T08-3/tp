@@ -48,6 +48,7 @@
         "ui-component": "UI component",
         "logic-component": "Logic component",
         "model-component": "Model component",
+        "storage-component": "Storage component",
         "common-classes": "Common classes",
         "implementation": "Implementation",
         "staff-management-system": "Staff Management System",

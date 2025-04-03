@@ -1,4 +1,4 @@
-@startuml
+@startuml StorageClassDiagram
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
@@ -6,19 +6,28 @@ skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage as StoragePackage {
 
-package "UserPrefs Storage" #F4F6F6{
+package "UserPrefs Storage" #F4F6F6 {
 Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
 Class JsonUserPrefsStorage
+}
+
+package "DrinkCatalog Storage" #F4F6F6 {
+Class "<<interface>>\nDrinkCatalogStorage" as DrinkCatalogStorage
+Class JsonDrinkCatalogStorage
+Class JsonSerializableDrinkCatalog
+Class JsonAdaptedDrink
 }
 
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
+package "AddressBook Storage" #F4F6F6 {
 Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
 Class JsonAdaptedPerson
+Class JsonAdaptedStaff
+Class JsonAdaptedCustomer
 Class JsonAdaptedTag
 }
 
@@ -30,14 +39,25 @@ HiddenOutside ..> Storage
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
 StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" DrinkCatalogStorage
 
 Storage -left-|> UserPrefsStorage
 Storage -right-|> AddressBookStorage
+Storage -down-|> DrinkCatalogStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
+JsonDrinkCatalogStorage .up.|> DrinkCatalogStorage
+
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSerializableAddressBook --> "*" JsonAdaptedStaff
+JsonSerializableAddressBook --> "*" JsonAdaptedCustomer
 JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonAdaptedStaff -up-|> JsonAdaptedPerson
+JsonAdaptedCustomer -up-|> JsonAdaptedPerson
+
+JsonDrinkCatalogStorage ..> JsonSerializableDrinkCatalog
+JsonSerializableDrinkCatalog --> "*" JsonAdaptedDrink
 
 @enduml

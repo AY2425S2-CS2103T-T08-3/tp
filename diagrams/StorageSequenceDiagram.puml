@@ -1,0 +1,63 @@
+@startuml StorageSequenceDiagram
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam sequenceLifeLineBorderColor STORAGE_COLOR
+skinparam sequenceMessageFontColor BLACK
+
+Actor ":User" as User LOGIC_COLOR_T1
+Participant ":LogicManager" as LogicManager LOGIC_COLOR
+Participant ":ModelManager" as ModelManager MODEL_COLOR
+Participant ":StorageManager" as StorageManager STORAGE_COLOR
+Participant ":JsonAddressBookStorage" as JsonAddressBookStorage STORAGE_COLOR
+Participant ":JsonSerializableAddressBook" as JsonSerializableAddressBook STORAGE_COLOR
+Participant ":File" as File STORAGE_COLOR
+
+User -> LogicManager : execute("customerdelete 1")
+activate LogicManager
+
+LogicManager -> ModelManager : deleteCustomer(customer)
+activate ModelManager
+note right of ModelManager
+  Command execution and model
+  modification steps (simplified)
+end note
+ModelManager --> LogicManager : CommandResult
+deactivate ModelManager
+
+LogicManager -> StorageManager : saveAddressBook(addressBook)
+activate StorageManager
+
+StorageManager -> JsonAddressBookStorage : saveAddressBook(addressBook, filePath)
+activate JsonAddressBookStorage
+note right of StorageManager
+  filePath points to addressbook.json
+end note
+
+JsonAddressBookStorage -> JsonSerializableAddressBook : new JsonSerializableAddressBook(addressBook)
+activate JsonSerializableAddressBook
+
+JsonSerializableAddressBook -> JsonSerializableAddressBook : for each staff/customer\ncreate JsonAdapted* objects
+
+JsonSerializableAddressBook --> JsonAddressBookStorage : jsonData
+deactivate JsonSerializableAddressBook
+
+JsonAddressBookStorage -> File : write to addressbook.json
+activate File
+note right of File
+  The file includes staff and
+  customer data in JSON format
+end note
+File --> JsonAddressBookStorage
+deactivate File
+
+JsonAddressBookStorage --> StorageManager
+deactivate JsonAddressBookStorage
+
+StorageManager --> LogicManager
+deactivate StorageManager
+
+LogicManager --> User : CommandResult
+deactivate LogicManager
+
+@enduml
