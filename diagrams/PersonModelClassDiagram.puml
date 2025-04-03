@@ -1,0 +1,117 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package "Person Model" as PersonModel {
+    class Person {
+        - name: Name
+        - phone: Phone
+        - email: Email
+        - address: Address
+        - remark: Remark
+        - tags: Set<Tag>
+        + getName(): Name
+        + getPhone(): Phone
+        + getEmail(): Email
+        + getAddress(): Address
+        + getRemark(): Remark
+        + getTags(): Set<Tag>
+        + isSamePerson(otherPerson): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Name {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - name: String
+        + getName(): String
+        + {static} isValidName(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Phone {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - phone: String
+        + getPhone(): String
+        + {static} isValidPhone(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Email {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - email: String
+        + getEmail(): String
+        + {static} isValidEmail(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Address {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - address: String
+        + getAddress(): String
+        + {static} isValidAddress(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Remark {
+        - remark: String
+        + getRemark(): String
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Tag {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - tagName: String
+        + getTagName(): String
+        + {static} isValidTagName(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class UniquePersonList {
+        - internalList: ObservableList<Person>
+        - internalUnmodifiableList: ObservableList<Person>
+        + contains(Person): boolean
+        + add(Person): void
+        + setPerson(Person, Person): void
+        + remove(Person): void
+        + setPersons(List<Person>): void
+        + setPersons(UniquePersonList): void
+        + asUnmodifiableObservableList(): ObservableList<Person>
+        + iterator(): Iterator<Person>
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+        - personsAreUnique(List<Person>): boolean
+    }
+}
+
+Person *--> "1" Name
+Person *--> "1" Phone
+Person *--> "1" Email
+Person *--> "1" Address
+Person *--> "1" Remark
+Person *--> "*" Tag
+
+UniquePersonList o--> "*" Person
+UniquePersonList ..|> "Iterable<Person>" : implements
+
+@enduml

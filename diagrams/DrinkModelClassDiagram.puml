@@ -1,18 +1,26 @@
 @startuml
-package "seedu.address.model.drink" {
-    interface "ReadOnlyDrinkCatalog" {
-        + getDrinkList(): List<Drink>
-    }
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
 
-    class "Drink" {
-        - name: String
-        - price: double
-        - category: String
+package "Drink Model" as DrinkModel {
+    class Drink {
+        - name: DrinkName
+        - price: Price
+        - category: Category
         - description: String
         - stock: int
-        + getName(): String
-        + getPrice(): double
-        + getCategory(): String
+        + Drink(name: String, price: double, category: String)
+        + getName(): DrinkName
+        + getPrice(): Price
+        + getCategory(): Category
+        + getPrintableName(): String
+        + getPrintablePrice(): String
+        + getPrintableCategory(): String
+        + getPrimitiveName(): String
+        + getPrimitivePrice(): double
+        + getPrimitiveCategory(): String
         + getDescription(): String
         + getStock(): int
         + setDescription(description: String): void
@@ -23,9 +31,40 @@ package "seedu.address.model.drink" {
         + toString(): String
     }
 
-    class "Category" {
+    class DrinkName {
         - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - drinkName: String
+        + DrinkName(drinkName: String)
+        + getDrinkName(): String
+        + {static} isValidDrinkName(test: String): boolean
+        + equals(Object): boolean
+        + equalsNameIgnoreCase(otherName: String): boolean
+        + containsWordIgnoreCase(word: String): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Price {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} POINTS_PER_DOLLAR: int
+        - {static} POINTS_TO_DOLLAR_RATIO: int
+        - price: double
+        + Price(price: double)
+        + getPrice(): double
+        + {static} isValidPrice(test: double): boolean
+        + calculatePointsForPurchase(): int
+        + calculatePointsForRedemption(): int
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Category {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
         - category: String
+        + Category(category: String)
         + getCategory(): String
         + {static} isValidCategory(test: String): boolean
         + equals(Object): boolean
@@ -33,27 +72,7 @@ package "seedu.address.model.drink" {
         + toString(): String
     }
 
-    class "DrinkName" {
-        - {static} MESSAGE_CONSTRAINTS: String
-        - drinkName: String
-        + getDrinkName(): String
-        + {static} isValidName(test: String): boolean
-        + equals(Object): boolean
-        + hashCode(): int
-        + toString(): String
-    }
-
-    class "Price" {
-        - {static} MESSAGE_CONSTRAINTS: String
-        - price: double
-        + getPrice(): double
-        + {static} isValidPrice(test: double): boolean
-        + equals(Object): boolean
-        + hashCode(): int
-        + toString(): String
-    }
-
-    class "UniqueDrinkList" {
+    class UniqueDrinkList {
         - internalList: ObservableList<Drink>
         - internalUnmodifiableList: ObservableList<Drink>
         + contains(toCheck: Drink): boolean
@@ -70,22 +89,42 @@ package "seedu.address.model.drink" {
         - drinksAreUnique(drinks: List<Drink>): boolean
     }
 
-    package "exceptions" {
-        class "DrinkNotFoundException" << Exception >> {
-        }
-
-        class "DuplicateDrinkException" << Exception >> {
-        }
+    class "DrinkNotFoundException" as DrinkNotFoundException << Exception >> {
     }
 
-    UniqueDrinkList ..> "Drink" : contains >
-    UniqueDrinkList ..> "DrinkNotFoundException" : throws >
-    UniqueDrinkList ..> "DuplicateDrinkException" : throws >
-    UniqueDrinkList ..|> "Iterable" : implements >
-    Drink ..> "Category" : uses >
-    Drink ..> "DrinkName" : uses >
-    Drink ..> "Price" : uses >
-    ReadOnlyDrinkCatalog ..> "Drink" : returns list of >
+    class "DuplicateDrinkException" as DuplicateDrinkException << Exception >> {
+    }
+
+    interface "ReadOnlyDrinkCatalog" {
+        + getDrinkList(): List<Drink>
+    }
+
+    class DrinkCatalog {
+        - drinks: UniqueDrinkList
+        + DrinkCatalog()
+        + getDrinkList(): List<Drink>
+        + hasDrink(drink: Drink): boolean
+        + addDrink(drink: Drink): void
+        + setDrink(target: Drink, editedDrink: Drink): void
+        + removeDrink(target: Drink): void
+        + setDrinks(drinks: List<Drink>): void
+        + setDrinks(replacement: ReadOnlyDrinkCatalog): void
+        + getDrinkByName(name: String): Optional<Drink>
+        + equals(Object): boolean
+        + hashCode(): int
+    }
 }
+
+Drink *--> "1" DrinkName
+Drink *--> "1" Price
+Drink *--> "1" Category
+
+DrinkCatalog ..|> ReadOnlyDrinkCatalog
+DrinkCatalog *--> "1" UniqueDrinkList
+
+UniqueDrinkList o--> "*" Drink
+UniqueDrinkList ..> DrinkNotFoundException : throws >
+UniqueDrinkList ..> DuplicateDrinkException : throws >
+UniqueDrinkList ..|> "Iterable<Drink>" : implements
 
 @enduml

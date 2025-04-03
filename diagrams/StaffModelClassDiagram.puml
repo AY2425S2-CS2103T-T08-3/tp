@@ -1,0 +1,108 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package "Staff Model" as StaffModel {
+    class Person
+
+    class Staff {
+        - staffId: StaffId
+        - role: Role
+        - shiftTiming: ShiftTiming
+        - hoursWorked: HoursWorked
+        - performanceRating: PerformanceRating
+        + getStaffId(): StaffId
+        + getRole(): Role
+        + getShiftTiming(): ShiftTiming
+        + getHoursWorked(): HoursWorked
+        + getPerformanceRating(): PerformanceRating
+        + isSameStaff(otherStaff): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class StaffId {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - staffId: String
+        + getStaffId(): String
+        + {static} isValidStaffId(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class Role {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - role: String
+        + getRole(): String
+        + {static} isValidRole(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class ShiftTiming {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - shiftTiming: String
+        + getShiftTiming(): String
+        + {static} isValidShiftTiming(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class HoursWorked {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - hoursWorked: int
+        + getHours(): int
+        + {static} isValidHours(int): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class PerformanceRating {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - rating: double
+        + getRating(): double
+        + {static} isValidRating(double): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class UniqueStaffList {
+        - internalList: ObservableList<Staff>
+        - internalUnmodifiableList: ObservableList<Staff>
+        + contains(Staff): boolean
+        + add(Staff): void
+        + setStaff(Staff, Staff): void
+        + remove(Staff): void
+        + setStaffs(List<Staff>): void
+        + setStaffs(UniqueStaffList): void
+        + asUnmodifiableObservableList(): ObservableList<Staff>
+        + iterator(): Iterator<Staff>
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+        - staffsAreUnique(List<Staff>): boolean
+    }
+}
+
+Staff -up-|> Person
+Staff *--> "1" StaffId
+Staff *--> "1" Role
+Staff *--> "1" ShiftTiming
+Staff *--> "1" HoursWorked
+Staff *--> "1" PerformanceRating
+
+UniqueStaffList o--> "*" Staff
+UniqueStaffList ..|> "Iterable<Staff>" : implements
+
+@enduml

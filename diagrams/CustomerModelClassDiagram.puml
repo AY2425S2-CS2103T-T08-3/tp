@@ -1,0 +1,110 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package "Customer Model" as CustomerModel {
+    class Person
+
+    class Customer {
+        - customerId: CustomerId
+        - rewardPoints: RewardPoints
+        - visitCount: VisitCount
+        - favouriteItem: FavouriteItem
+        - totalSpent: TotalSpent
+        + getCustomerId(): CustomerId
+        + getRewardPoints(): RewardPoints
+        + getVisitCount(): VisitCount
+        + getFavouriteItem(): FavouriteItem
+        + getTotalSpent(): TotalSpent
+        + addRewardPoints(int): void
+        + deductRewardPoints(int): void
+        + incrementVisitCount(): void
+        + updateTotalSpent(double): void
+        + isSameCustomer(otherCustomer): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class CustomerId {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - customerId: String
+        + getCustomerId(): String
+        + {static} isValidCustomerId(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class RewardPoints {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - points: int
+        + getPoints(): int
+        + {static} isValidPoints(int): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class VisitCount {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - count: int
+        + getCount(): int
+        + {static} isValidCount(int): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class FavouriteItem {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - item: String
+        + getItem(): String
+        + {static} isValidItem(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class TotalSpent {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - amount: double
+        + getAmount(): double
+        + {static} isValidAmount(double): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
+
+    class UniqueCustomerList {
+        - internalList: ObservableList<Customer>
+        - internalUnmodifiableList: ObservableList<Customer>
+        + contains(Customer): boolean
+        + add(Customer): void
+        + setCustomer(Customer, Customer): void
+        + remove(Customer): void
+        + setCustomers(List<Customer>): void
+        + setCustomers(UniqueCustomerList): void
+        + asUnmodifiableObservableList(): ObservableList<Customer>
+        + iterator(): Iterator<Customer>
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+        - customersAreUnique(List<Customer>): boolean
+    }
+}
+
+Customer -up-|> Person
+Customer *--> "1" CustomerId
+Customer *--> "1" RewardPoints
+Customer *--> "1" VisitCount
+Customer *--> "1" FavouriteItem
+Customer *--> "1" TotalSpent
+
+UniqueCustomerList o--> "*" Customer
+UniqueCustomerList ..|> "Iterable<Customer>" : implements
+
+@enduml
