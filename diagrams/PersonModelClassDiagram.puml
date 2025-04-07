@@ -10,11 +10,13 @@ package "Person Model" as PersonModel {
         - phone: Phone
         - email: Email
         - address: Address
+        - remark: Remark
         - tags: Set<Tag>
         + getName(): Name
         + getPhone(): Phone
         + getEmail(): Email
         + getAddress(): Address
+        + getRemark(): Remark
         + getTags(): Set<Tag>
         + isSamePerson(otherPerson): boolean
         + equals(Object): boolean
@@ -65,6 +67,15 @@ package "Person Model" as PersonModel {
         + toString(): String
     }
 
+    class Remark {
+        - {static} MESSAGE_CONSTRAINTS: String
+        - {static} VALIDATION_REGEX: String
+        - value: String
+        + {static} isValidRemark(String): boolean
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+    }
 
     class Tag {
         - {static} MESSAGE_CONSTRAINTS: String
@@ -99,6 +110,7 @@ Person *--> "1" Name
 Person *--> "1" Phone
 Person *--> "1" Email
 Person *--> "1" Address
+Person *--> "1" Remark
 Person *--> "*" Tag
 
 UniquePersonList o--> "*" Person
