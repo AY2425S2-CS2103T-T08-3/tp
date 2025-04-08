@@ -106,6 +106,6 @@ Customer *--> "1" FavouriteItem
 Customer *--> "1" TotalSpent
 
 UniquePersonList o--> "*" Customer
-UniquePersonList ..|> "Iterable<Customer>" : implements
+UniquePersonList ..|> "Iterable<Person>" : implements
 
 @enduml

@@ -104,6 +104,6 @@ Staff *--> "1" HoursWorked
 Staff *--> "1" PerformanceRating
 
 UniquePersonList o--> "*" Staff
-UniquePersonList ..|> "Iterable<Staff>" : implements
+UniquePersonList ..|> "Iterable<Person>" : implements
 
 @enduml
