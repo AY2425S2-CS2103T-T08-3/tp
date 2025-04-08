@@ -98,6 +98,7 @@ package "Person Model" as PersonModel {
         + setPersons(List<Person>): void
         + setPersons(UniquePersonList): void
         + asUnmodifiableObservableList(): ObservableList<Person>
+        + getFilteredList<T extends Person>(Class<T>): FilteredList<T>
         + iterator(): Iterator<Person>
         + equals(Object): boolean
         + hashCode(): int
